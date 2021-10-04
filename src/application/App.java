@@ -7,27 +7,34 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.awt.Point;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class App extends Pane {
-
-	private static final int RIGHT = 1;
-	private static final int LEFT = 2;
-	private static final int UP = 3;
-	private static final int DOWN = 4;
 
 	private static final int TILE_SIZE = 30;
 	private static final int X_TILES = 15;
 	private static final int Y_TILES = 10;
-
+	
+	Image harry = new Image("file:src/img/harry.png");
+	ImageView harryView = new ImageView(harry);
+	
 	private Tile[][] grid = new Tile[X_TILES][Y_TILES];
 
 	private int[][] maze = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -39,7 +46,7 @@ public class App extends Pane {
 			{ 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
 			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1 }, 
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
-			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1 } };
+			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1 } };
 
 	public App() {
 		initUI();
@@ -63,46 +70,56 @@ public class App extends Pane {
 		}
 
 		Player player = new Player(1, 9);
+		player.setPadding(new Insets(0, 10, 0, 0));
+		player.setPrefWidth(5);
+		player.setGraphic(harryView);
 
 		player.setOnKeyPressed(e -> {
 			KeyCode code = e.getCode();
-			if (code == KeyCode.RIGHT && maze[player.y][player.x+1] == 0 ) {
+			if (code == KeyCode.RIGHT && maze[player.y][player.x+1] != 1 ) {
 				player.x += 1;
 				player.setTranslateX(player.x * TILE_SIZE);
 
-			} else if (code == KeyCode.LEFT && maze[player.y][player.x-1] == 0 ) {
+			} else if (code == KeyCode.LEFT && maze[player.y][player.x-1] != 1 ) {
 				player.x -= 1;
 				player.setTranslateX(player.x * TILE_SIZE);
-			} else if (code == KeyCode.UP && maze[player.y-1][player.x] == 0 ) {
+			} else if (code == KeyCode.UP && maze[player.y-1][player.x] != 1 ) {
 				player.y -= 1;
 				player.setTranslateY(player.y * TILE_SIZE);
-			} else if (code == KeyCode.DOWN && maze[player.y+1][player.x] == 0) {
+			} else if (code == KeyCode.DOWN && maze[player.y+1][player.x] != 1 ) {
 				player.y += 1;
 				player.setTranslateY(player.y * TILE_SIZE);
 			} else {
+				
+				System.out.println(player.x);
+				System.out.println(player.y);
 				return;
-				//System.out.println(player.x);
-				//System.out.println(player.y);
+			}
+			
+			if (maze[player.y][player.x] == 3) {
+				System.out.println("game is won!");
 			}
 		});
 
+		harryView.setFitWidth(TILE_SIZE);
+		harryView.setPreserveRatio(true);
 		background.getChildren().add(player);
 
 		getChildren().add(background);
 
 	}
 
-	public class Player extends Button {
-		//Rectangle playerRect = new Rectangle(TILE_SIZE+5, TILE_SIZE);
+	public class Player extends Button{
 		private int x, y;
 
 		public Player(int x, int y) {
 			this.x = x;
 			this.y = y;
-			//getChildren().add(playerRect);
 
 			setTranslateX(x * TILE_SIZE);
 			setTranslateY(y * TILE_SIZE);
+			
+			
 		}
 
 	}
@@ -131,5 +148,7 @@ public class App extends Pane {
 				tileColor.setFill(Color.YELLOW);
 			}
 		}
+		
+		
 	}
 }

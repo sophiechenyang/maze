@@ -12,9 +12,18 @@ public class Main extends Application {
         Group root = new Group();
         App app = new App() ;
         root.getChildren().add(app);
+        
+        Scene scene = new Scene(root, 550, 500);
+        
+
 
         primaryStage.setTitle("Harry Potter Maze");
-        primaryStage.setScene(new Scene(root, 550, 500));
+        
+        primaryStage.setScene(scene);
+        
+        
+
+        
         primaryStage.show();
     }
 
