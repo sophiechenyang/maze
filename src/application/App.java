@@ -35,6 +35,7 @@ public class App extends Pane {
 	Image harry = new Image("file:src/img/harry.png");
 	ImageView harryView = new ImageView(harry);
 	
+	
 	private Tile[][] grid = new Tile[X_TILES][Y_TILES];
 
 	private int[][] maze = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -70,9 +71,8 @@ public class App extends Pane {
 		}
 
 		Player player = new Player(1, 9);
-		player.setPadding(new Insets(0, 10, 0, 0));
-		player.setPrefWidth(5);
-		player.setGraphic(harryView);
+		harryView.setFitWidth(TILE_SIZE);
+		harryView.setPreserveRatio(true);
 
 		player.setOnKeyPressed(e -> {
 			KeyCode code = e.getCode();
@@ -101,20 +101,23 @@ public class App extends Pane {
 			}
 		});
 
-		harryView.setFitWidth(TILE_SIZE);
-		harryView.setPreserveRatio(true);
+		
 		background.getChildren().add(player);
 
 		getChildren().add(background);
 
 	}
 
-	public class Player extends Button{
+	public class Player extends ImageView{
 		private int x, y;
 
 		public Player(int x, int y) {
 			this.x = x;
 			this.y = y;
+			this.setImage(harry);
+			this.setFitWidth(TILE_SIZE);
+			this.setFitHeight(TILE_SIZE);
+			setFocusTraversable(true);
 
 			setTranslateX(x * TILE_SIZE);
 			setTranslateY(y * TILE_SIZE);
