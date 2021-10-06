@@ -5,6 +5,7 @@ public class GameModel {
 	private static final int X_TILES = 15;
 	private static final int Y_TILES = 10;
 	private static final int TILE_SIZE = 30;
+	private boolean gameWon = false;
 	
 	private static int[][] MAZE = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -31,6 +32,14 @@ public class GameModel {
 	
 	public static int getY_TILES() {
 		return Y_TILES;
+	}
+
+	public boolean isGameWon() {
+		return gameWon;
+	}
+
+	public void setGameWon(boolean gameWon) {
+		this.gameWon = gameWon;
 	}
 	
 

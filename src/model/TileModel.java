@@ -4,13 +4,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class TileView extends StackPane {
+public class TileModel extends StackPane {
 	private int x, y;
 	private static final int TILE_SIZE = 30;
 
 	private Rectangle tileColor = new Rectangle(TILE_SIZE, TILE_SIZE);
 
-	public TileView(int x, int y) {
+	public TileModel(int x, int y) {
 		this.x = x;
 		this.y = y;
 

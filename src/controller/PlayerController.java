@@ -6,17 +6,22 @@ import javafx.scene.input.KeyEvent;
 import model.PlayerModel;
 import model.GameModel;
 import view.PlayerView;
+import model.WandModel;
+import view.WandView;
 
 public class PlayerController {
 	
 	private PlayerView view;
 	private PlayerModel model;
+	private GameModel game;
 	private int moveSize = GameModel.getTileSize();
 	private int[][] maze = GameModel.getMaze();
+	private boolean hasWand = false;
 	
-	public PlayerController(PlayerView view, PlayerModel model) {
+	public PlayerController(PlayerView view, PlayerModel model, GameModel game) {
 		this.view = view;
 		this.model = model;
+		this.game = game;
 		
 		this.view.setPlayerHandler(new MovePlayer());
 	}
@@ -51,8 +56,13 @@ public class PlayerController {
 			}
 			
 			if (maze[currentPlayerY][currentPlayerX] == 3) {
-				System.out.println("game is won!");
+				game.setGameWon(true);
+				System.out.println(game.isGameWon());
 			}
+			
+			if (currentPlayerX == WandModel.getX() && currentPlayerY == WandModel.getY())
+				hasWand = true;
+				System.out.println(hasWand);
 
 		}
 	}

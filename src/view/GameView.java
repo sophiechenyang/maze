@@ -5,25 +5,34 @@ import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import model.GameModel;
 import model.PlayerModel;
-import model.TileView;
+import model.TileModel;
+import model.WandModel;
 
 public class GameView {
 
+	GameModel game = new GameModel();
 	private int[][] maze = GameModel.getMaze();
 	private int x_tiles = GameModel.getX_TILES();
 	private int y_tiles = GameModel.getY_TILES();
 	
 	PlayerModel player = new PlayerModel(1,9);
 	PlayerView playerview = new PlayerView(player);
-	PlayerController playercontroller = new PlayerController(playerview, player);
+	PlayerController playercontroller = new PlayerController(playerview, player, game);
 	
-	private TileView[][] grid = new TileView[x_tiles][y_tiles];
+	WandModel wand = new WandModel(5,1);
+	WandView wandview = new WandView(wand);
+	
+	private TileModel[][] grid = new TileModel[x_tiles][y_tiles];
 
 	public Parent createContent() {
 		Pane rootpane = new Pane();
 		createMaze(rootpane);
+				
+		rootpane.getChildren().add(playerview);
+		rootpane.getChildren().add(wandview);
+		System.out.println(maze[player.getY()][player.getX()]);
 		
-		rootpane.getChildren().add(playerview);	
+		winMessage();
 
 		return rootpane;
 	}
@@ -32,19 +41,22 @@ public class GameView {
 
 		for (int y = 0; y < y_tiles; y++) {
 			for (int x = 0; x < x_tiles; x++) {
-				TileView tile = new TileView(x, y);
+				TileModel tile = new TileModel(x, y);
 
 				grid[x][y] = tile;
-				int colorIndex = getMaze()[y][x];
+				int colorIndex = maze[y][x];
 				tile.setColor(colorIndex);
 
 				pane.getChildren().add(tile);
 			}
 		}
 	}
-
-	public int[][] getMaze() {
-		return maze;
+	
+	public void winMessage() {
+		if (game.isGameWon())
+			System.out.println("game is won!");
 	}
+
+
 
 }
