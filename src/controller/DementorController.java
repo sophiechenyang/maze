@@ -1,26 +1,26 @@
 package controller;
 
-import view.BeetleView;
+import view.DementorView;
 import view.GameView;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import model.BeetleModel;
+import model.DementorModel;
 import model.GameModel;
 
-public class BeetleController {
-	private BeetleView beetleView;
-	private BeetleModel beetleModel;
+public class DementorController {
+	private DementorView dementorView;
+	private DementorModel dementorModel;
 	private GameModel gameModel;
 	private GameController gameController;
 
-	public BeetleController(BeetleModel beetleModel, BeetleView beetleView, GameModel gameModel, GameController gameController) {
-		this.beetleView = beetleView;
-		this.beetleModel = beetleModel;
+	public DementorController(DementorModel dementorModel, DementorView dementorView, GameModel gameModel, GameController gameController) {
+		this.dementorView = dementorView;
+		this.dementorModel = dementorModel;
 		this.gameModel = gameModel;
 		this.gameController = gameController;
-		this.beetleView.setPlayerHandler(new clickBeetle());
-		this.beetleView.setHoverHandler(new hoverBeetle());
+		this.dementorView.setPlayerHandler(new clickBeetle());
+		this.dementorView.setHoverHandler(new hoverDementor());
 
 	}
 
@@ -31,24 +31,22 @@ public class BeetleController {
 			if (e.getClickCount() > 2) {
 				//System.out.println(e);
 				
-				if (beetleModel.isDead())
+				if (dementorModel.isDead())
 					return;
 				
 				killBeetle();
 				
 			} else if (e.getButton() == MouseButton.SECONDARY){
-				beetleView.stopBeetle();
+				dementorView.stopBeetle();
 			}
 		}
 	}
 	
-	class hoverBeetle implements EventHandler<MouseEvent> {
+	class hoverDementor implements EventHandler<MouseEvent> {
 
 		@Override
 		public void handle(MouseEvent e) {
-				beetleView.stopBeetle();
-				gameController.setGameOver();
-
+				dementorView.stopBeetle();
 			//System.out.println(e);
 			
 		}
@@ -58,9 +56,9 @@ public class BeetleController {
 		//beetleView.setImage(null);
 		
 		if (gameModel.isGameActive()) {
-			beetleView.fadeBeetle(this.beetleView);
-			beetleModel.setDead(true);
-			gameModel.removeFromBeetleList(beetleModel);
+			dementorView.fadeBeetle(this.dementorView);
+			dementorModel.setDead(true);
+			gameModel.removeFromBeetleList(dementorModel);
 			gameController.updateBeetleScore();
 		}
 	}

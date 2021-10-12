@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import model.BeetleModel;
+import model.DementorModel;
 import model.GameModel;
 import model.PlayerModel;
 import model.TileModel;
@@ -34,7 +34,7 @@ public class GameView extends Parent{
 	Text gameScore = new Text("0");
 	Text jewelScore = new Text("0");
 	Pane pane = new Pane();
-	private ArrayList<BeetleView> beetleViewList = new ArrayList<BeetleView>();
+	private ArrayList<DementorView> beetleViewList = new ArrayList<DementorView>();
 	
 	public GameView() {
 		BorderPane root = new BorderPane();
@@ -58,11 +58,11 @@ public class GameView extends Parent{
 		return playerView;
 	}
 	
-	public BeetleView createBeatle(BeetleModel beetlemodel, GameModel gameModel) {
-		BeetleView beetleView = new BeetleView(beetlemodel);
-		pane.getChildren().add(beetleView);
-		beetleViewList.add(beetleView);
-		return beetleView;
+	public DementorView createBeatle(DementorModel beetlemodel, GameModel gameModel) {
+		DementorView dementorView = new DementorView(beetlemodel);
+		pane.getChildren().add(dementorView);
+		beetleViewList.add(dementorView);
+		return dementorView;
 	}
 	
 	public TreasureView createTreasure(TreasureModel treasureModel) {

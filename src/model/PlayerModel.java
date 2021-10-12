@@ -1,9 +1,11 @@
 package model;
 
 public class PlayerModel{
-	private int x = 1;
-	private int y = 9;
+	protected int x = 1;
+	protected int y = 9;
 	private int playerIndex;
+	protected int mana;
+	private String playerURL;
 	
 	public PlayerModel(int playerIndex) {
 		this.setPlayerIndex(playerIndex);
@@ -31,6 +33,14 @@ public class PlayerModel{
 
 	public void setPlayerIndex(int playerIndex) {
 		this.playerIndex = playerIndex;
+	}
+
+	public String getPlayerURL() {
+		return playerURL;
+	}
+
+	public void setPlayerURL(String playerURL) {
+		this.playerURL = playerURL;
 	}
 
 	

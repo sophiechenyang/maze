@@ -27,14 +27,31 @@ public class GameModel extends Parent {
 	private boolean gameWon = false;
 	private boolean gameOver = false;
 	private boolean gameActive = false;
-	private ArrayList<BeetleModel> beetleList = new ArrayList<BeetleModel>(); 
+	private ArrayList<DementorModel> beetleList = new ArrayList<DementorModel>(); 
+	private int playerType = 0;
+	private boolean isAdvanced = false; 
 	
 	// microgames
 	private boolean snakeDefeated = false;
 	private boolean wandRetrieved = false;
 	
-	public BeetleModel createBeatle() {
-		BeetleModel beetle = new BeetleModel(generateRand(), generateRand());
+	public PlayerModel createPlayer(int playerType) {
+		if (playerType == 0) {
+			HarryModel player = new HarryModel(0);
+			return player;
+		} 
+			
+		if (playerType == 1) {
+			RonModel player = new RonModel(1);
+			return player;
+		}
+		
+		return null;
+	}
+	
+	
+	public DementorModel createBeatle() {
+		DementorModel beetle = new DementorModel(generateRand(), generateRand());
 		beetleList.add(beetle);
 		return beetle;
 	}
@@ -109,7 +126,7 @@ public class GameModel extends Parent {
 		return beetleList;
 	}
 
-	public void removeFromBeetleList(BeetleModel beetleModel) {
+	public void removeFromBeetleList(DementorModel beetleModel) {
 		beetleList.remove(beetleModel);
 	}
 
@@ -139,6 +156,26 @@ public class GameModel extends Parent {
 
 	public void setWandRetrieved(boolean wandRetrieved) {
 		this.wandRetrieved = wandRetrieved;
+	}
+
+
+	public int getPlayerType() {
+		return playerType;
+	}
+
+
+	public void setPlayerType(int playerType) {
+		this.playerType = playerType;
+	}
+
+
+	public boolean isAdvanced() {
+		return isAdvanced;
+	}
+
+
+	public void setAdvanced(boolean isAdvanced) {
+		this.isAdvanced = isAdvanced;
 	}
 
 

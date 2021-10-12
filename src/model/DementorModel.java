@@ -1,10 +1,10 @@
 package model;
 
-public class BeetleModel extends GameModel{
+public class DementorModel extends GameModel{
 	private int x, y;
 	private boolean isDead = false;
 	
-	public BeetleModel(int x, int y) {
+	public DementorModel(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}

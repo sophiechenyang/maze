@@ -10,12 +10,12 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import model.BeetleModel;
+import model.DementorModel;
 import model.GameModel;
 import model.PlayerModel;
 import model.TileModel;
 import model.TreasureModel;
-import view.BeetleView;
+import view.DementorView;
 import view.GameView;
 import view.PlayerView;
 import view.TileView;
@@ -24,7 +24,7 @@ import view.TreasureView;
 public class GameController {
 	private GameView gameView = new GameView();
 	private GameModel gameModel = new GameModel();
-	private PlayerModel player;
+	private PlayerModel playerModel;
 	private PlayerView playerView;
 	private int[][] maze = gameModel.getMaze();
 	Timer timer;
@@ -38,7 +38,7 @@ public class GameController {
 
 	public void startGame() {
 		timer = new Timer();
-		//timer.schedule(new RemindTask(), 0, 8000);
+		timer.schedule(new RemindTask(), 0, 10000);
 		//timer.schedule(new CheckWin(), 0, 100);
 		gameModel.setGameActive(true);
 
@@ -57,7 +57,7 @@ public class GameController {
 
 	class RemindTask extends TimerTask {
 
-		ArrayList<BeetleModel> beetleList = gameModel.getBeetleList();
+		ArrayList<DementorModel> beetleList = gameModel.getBeetleList();
 
 		public void run() {
 			Platform.runLater(() -> {
@@ -77,21 +77,22 @@ public class GameController {
 		public void run() {
 			Platform.runLater(() -> {
 				
-				System.out.println("player location is X:" + player.getX() + "Y: " + player.getY());
+				System.out.println("player location is X:" + playerModel.getX() + "Y: " + playerModel.getY());
 				
 			});
 		}
 	}
 
 	public void createPlayer() {
-		player = new PlayerModel(2);
-		playerView = gameView.createPlayer(player);
+		//playerModel = new PlayerModel(2);
+		playerModel = gameModel.createPlayer(1);
+		playerView = gameView.createPlayer(playerModel);
 	}
 
 	public void createBeetle() {
-		BeetleModel beetle = gameModel.createBeatle();
-		BeetleView beetleView = gameView.createBeatle(beetle, gameModel);
-		BeetleController beetleController = new BeetleController(beetle, beetleView, gameModel, this);
+		DementorModel beetle = gameModel.createBeatle();
+		DementorView dementorView = gameView.createBeatle(beetle, gameModel);
+		DementorController dementorController = new DementorController(beetle, dementorView, gameModel, this);
 	}
 
 	void createTreasure(int x, int y) {
@@ -112,40 +113,40 @@ public class GameController {
 		public void handle(KeyEvent event) {
 			KeyCode code = event.getCode();
 
-			int currentPlayerX = player.getX();
-			int currentPlayerY = player.getY();
+			int currentPlayerX = playerModel.getX();
+			int currentPlayerY = playerModel.getY();
 
 			if (code == KeyCode.RIGHT && maze[currentPlayerY][currentPlayerX + 1] != 1) {
 
-				player.setX(currentPlayerX + 1);
-				playerView.moveX(player.getX() * tileSize);
+				playerModel.setX(currentPlayerX + 1);
+				playerView.moveX(playerModel.getX() * tileSize);
 
 			} else if (code == KeyCode.LEFT && maze[currentPlayerY][currentPlayerX - 1] != 1) {
-				player.setX(currentPlayerX - 1);
-				playerView.moveX(player.getX() * tileSize);
+				playerModel.setX(currentPlayerX - 1);
+				playerView.moveX(playerModel.getX() * tileSize);
 
 			} else if (code == KeyCode.UP && maze[currentPlayerY - 1][currentPlayerX] != 1) {
-				player.setY(currentPlayerY - 1);
-				playerView.moveY(player.getY() * tileSize);
+				playerModel.setY(currentPlayerY - 1);
+				playerView.moveY(playerModel.getY() * tileSize);
 
 			} else if (code == KeyCode.DOWN && maze[currentPlayerY + 1][currentPlayerX] != 1) {
-				player.setY(currentPlayerY + 1);
-				playerView.moveY(player.getY() * tileSize);
+				playerModel.setY(currentPlayerY + 1);
+				playerView.moveY(playerModel.getY() * tileSize);
 
 			} else {
 				return;
 			}
 			
-			if (player.getX() == 1 && player.getY() == 7) {
+			if (playerModel.getX() == 1 && playerModel.getY() == 7) {
 				gameModel.setGameWon(true);
 				System.out.println("Game won:" + gameModel.isGameWon());
 			}
 			
-			if (maze[player.getY()][player.getX()] == 3 && gameModel.isSnakeDefeated() ==false ) {
+			if (maze[playerModel.getY()][playerModel.getX()] == 3 && gameModel.isSnakeDefeated() ==false ) {
 				Main.launchSnakeScene(gameModel);
 			} 
 			
-			if (maze[player.getY()][player.getX()] == 4 && gameModel.isWandRetrieved() ==false ) {
+			if (maze[playerModel.getY()][playerModel.getX()] == 4 && gameModel.isWandRetrieved() ==false ) {
 				Main.launchWandScene(gameModel);
 			}
 		}
