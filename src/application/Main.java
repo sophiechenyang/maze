@@ -29,7 +29,7 @@ public class Main extends Application{
         primaryStage.setTitle("HP Maze");
         primaryStage.show();
         
-        launchGame(true,0);
+        //launchGame(true,0);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
