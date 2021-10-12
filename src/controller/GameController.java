@@ -29,8 +29,9 @@ public class GameController {
 	private int[][] maze = gameModel.getMaze();
 	Timer timer;
 	private int tileSize = gameModel.getTileSize();
-
-	public GameController() {
+	public GameController(boolean difficulty, int playerType) {
+		gameModel.setPlayerType(playerType);
+		gameModel.isAdvanced();
 		startGame();
 		
 		gameView.setKeyPressHandler(new activateAmulet());
