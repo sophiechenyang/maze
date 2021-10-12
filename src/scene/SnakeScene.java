@@ -2,11 +2,13 @@ package scene;
 
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.GameModel;
 
 public class SnakeScene {
@@ -19,6 +21,7 @@ public class SnakeScene {
 	
 	public Parent makeSnakeScene() {
 		VBox root = new VBox();
+		Button closeButton = new Button("Return to Game");
 		
     	Image naginiImg = new Image("file:img/nagini.png");
     	ImageView naginiView = new ImageView(naginiImg);
@@ -36,8 +39,15 @@ public class SnakeScene {
             	if (naginiView.getScaleX() < 0.1);
             		text.setText("Now the snake is harmless");
             		gameModel.setSnakeDefeated(true);
+            		root.getChildren().add(closeButton);
+            		closeButton.setOnMouseClicked(e -> closeWindow());
             
             }
+            
+            private void closeWindow() {
+				Stage stage = (Stage) closeButton.getScene().getWindow();
+				stage.close();
+			}
             
         });
     	

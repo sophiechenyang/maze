@@ -29,12 +29,12 @@ public class GameController {
 	private int[][] maze = gameModel.getMaze();
 	Timer timer;
 	private int tileSize = gameModel.getTileSize();
+	
 	public GameController(boolean difficulty, int playerType) {
+		gameView.setKeyPressHandler(new events());
 		gameModel.setPlayerType(playerType);
 		gameModel.isAdvanced();
 		startGame();
-		
-		gameView.setKeyPressHandler(new activateAmulet());
 	}
 
 	public void startGame() {
@@ -52,7 +52,7 @@ public class GameController {
 			}
 		}
 
-		createPlayer();
+		createPlayer(gameModel.getPlayerType());
 
 	}
 
@@ -84,9 +84,8 @@ public class GameController {
 		}
 	}
 
-	public void createPlayer() {
-		//playerModel = new PlayerModel(2);
-		playerModel = gameModel.createPlayer(1);
+	public void createPlayer(int playerType) {
+		playerModel = gameModel.createPlayer(playerType);
 		playerView = gameView.createPlayer(playerModel);
 	}
 
@@ -109,7 +108,7 @@ public class GameController {
 		}
 	}
 
-	class activateAmulet implements EventHandler<KeyEvent> {
+	class events implements EventHandler<KeyEvent> {
 		@Override
 		public void handle(KeyEvent event) {
 			KeyCode code = event.getCode();
@@ -143,12 +142,16 @@ public class GameController {
 				System.out.println("Game won:" + gameModel.isGameWon());
 			}
 			
-			if (maze[playerModel.getY()][playerModel.getX()] == 3 && gameModel.isSnakeDefeated() ==false ) {
+			if (maze[playerModel.getY()][playerModel.getX()] == 3 && !gameModel.isSnakeDefeated()) {
 				Main.launchSnakeScene(gameModel);
 			} 
 			
-			if (maze[playerModel.getY()][playerModel.getX()] == 4 && gameModel.isWandRetrieved() ==false ) {
+			if (maze[playerModel.getY()][playerModel.getX()] == 4 && !gameModel.isWandRetrieved()) {
 				Main.launchWandScene(gameModel);
+			}
+			
+			if (maze[playerModel.getY()][playerModel.getX()] == 5 && !gameModel.isCodeRetrieved()) {
+				Main.launchSafeScene(gameModel);
 			}
 		}
 	}

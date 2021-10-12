@@ -16,9 +16,9 @@ public class GameModel extends Parent {
 			{ 1, 0, 1, 0, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1 },
 			{ 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-			{ 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1 },
+			{ 1, 3, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1 },
 			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1 }, 
-			{ 1, 3, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
+			{ 1, 5, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
 			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1 }, 
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
 			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1 } };
@@ -34,6 +34,7 @@ public class GameModel extends Parent {
 	// microgames
 	private boolean snakeDefeated = false;
 	private boolean wandRetrieved = false;
+	private boolean codeRetrieved = false; 
 	
 	public PlayerModel createPlayer(int playerType) {
 		if (playerType == 0) {
@@ -43,6 +44,16 @@ public class GameModel extends Parent {
 			
 		if (playerType == 1) {
 			RonModel player = new RonModel(1);
+			return player;
+		}
+		
+		if (playerType == 2) {
+			HermioneModel player = new HermioneModel(2);
+			return player;
+		}
+		
+		if (playerType == 3) {
+			DracoModel player = new DracoModel(3);
 			return player;
 		}
 		
@@ -176,6 +187,16 @@ public class GameModel extends Parent {
 
 	public void setAdvanced(boolean isAdvanced) {
 		this.isAdvanced = isAdvanced;
+	}
+
+
+	public boolean isCodeRetrieved() {
+		return codeRetrieved;
+	}
+
+
+	public void setCodeRetrieved(boolean codeRetrieved) {
+		this.codeRetrieved = codeRetrieved;
 	}
 
 

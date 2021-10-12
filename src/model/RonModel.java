@@ -6,6 +6,7 @@ public class RonModel extends PlayerModel {
 		super(playerIndex);
 		mana = 5;
 		setPlayerURL("file:img/ron.png");
+		house = houseList[0];
 	}
 
 

@@ -8,11 +8,12 @@ import javafx.stage.Stage;
 import model.GameModel;
 import setup.setUpApp;
 import scene.WandScene;
+import scene.SafeScene;
 import scene.SnakeScene;
 import controller.GameController;
 
 public class Main extends Application{
-
+	GameModel gameModel;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -27,9 +28,10 @@ public class Main extends Application{
         
         primaryStage.setScene(scene);
         primaryStage.setTitle("HP Maze");
-        primaryStage.show();
+        //primaryStage.show();
         
-        //launchGame(true,0);
+        launchGame(true,3);
+        //launchSafeScene(gameModel);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
@@ -44,7 +46,7 @@ public class Main extends Application{
 
 	}
 	
-	public void launchGame(boolean difficulty, int playerType) {
+	public static void launchGame(boolean difficulty, int playerType) {
 		Pane root = new Pane();
         GameController controller = new GameController(difficulty, playerType);
         root.getChildren().add(controller.getGameView());
@@ -73,6 +75,16 @@ public class Main extends Application{
 		wandStage.setTitle("Retrieve Elder Wand");
 		wandStage.setScene(wandScene);
 		wandStage.show();
+		
+	}
+	
+	public static void launchSafeScene(GameModel gameModel) {
+		SafeScene safe = new SafeScene(gameModel);
+		Scene safeScene = new Scene(safe.makeSafeScene(), 800, 600);
+		Stage safeStage = new Stage();
+		safeStage.setTitle("Retrieve Secret Code");
+		safeStage.setScene(safeScene);
+		safeStage.show();
 		
 	}
 }

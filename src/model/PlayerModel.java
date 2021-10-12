@@ -6,6 +6,8 @@ public class PlayerModel{
 	private int playerIndex;
 	protected int mana;
 	private String playerURL;
+	protected String[] houseList = {"Gryfindor", "Ravenclaw", "Hufflepuff", "Slytherin"};
+	protected String house;
 	
 	public PlayerModel(int playerIndex) {
 		this.setPlayerIndex(playerIndex);

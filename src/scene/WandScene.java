@@ -2,12 +2,14 @@ package scene;
 
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.GameModel;
 
 public class WandScene {
@@ -20,6 +22,7 @@ public class WandScene {
 		Pane root = new Pane();
 		
 		Text text = new Text("Hover over harry and scroll to move it to the upper right corner");
+		Button closeButton = new Button("Return to Game");
 		
     	Image wandImg = new Image("file:img/elder-wand.png");
     	ImageView wandView = new ImageView(wandImg);
@@ -46,11 +49,18 @@ public class WandScene {
             		System.out.println("wand retrieved!");
             		wandView.setImage(null);
             		gameModel.setWandRetrieved(true);
+            		closeButton.setOnMouseClicked(e -> closeWindow());
+            		root.getChildren().add(closeButton);
             	}
                 
                 System.out.println(harryView.getTranslateX());
                 System.out.println(harryView.getTranslateY());
             }
+            
+            private void closeWindow() {
+				Stage stage = (Stage) closeButton.getScene().getWindow();
+				stage.close();
+			}
         });
     	
 		root.getChildren().addAll(wandView, harryView, text);

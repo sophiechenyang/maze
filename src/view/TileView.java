@@ -15,7 +15,7 @@ public class TileView extends ImageView {
 	private Image tileImage = new Image("file:img/tile.png");
 	private Image grassTile = new Image("file:img/grass_tile.png");
 	private Image wandImage = new Image("file:img/wand.png");
-	private Image snakeImage = new Image("file:img/nagini_tile.jpg");
+	private Image snakeImage = new Image("file:img/snake.png");
 
 	private int tileType;
 
