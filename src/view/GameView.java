@@ -43,7 +43,7 @@ public class GameView extends Parent{
 	private int health;
 	
 	Pane pane = new Pane();
-	private ArrayList<DementorView> beetleViewList = new ArrayList<DementorView>();
+	private ArrayList<DementorView> dementorViewList = new ArrayList<DementorView>();
 	
 	public GameView() {
 		BorderPane root = new BorderPane();
@@ -86,7 +86,7 @@ public class GameView extends Parent{
 	public DementorView createDementor(DementorModel dementorModel, GameModel gameModel) {
 		DementorView dementorView = new DementorView(dementorModel);
 		pane.getChildren().add(dementorView);
-		beetleViewList.add(dementorView);
+		dementorViewList.add(dementorView);
 		return dementorView;
 	}
 	
@@ -190,7 +190,7 @@ public class GameView extends Parent{
 	public void setLostView() {
 		Image lostImg = new Image("file:img/harry.png");
 		
-		beetleViewList.forEach(beetle -> beetle.stopBeetle());
+		dementorViewList.forEach(dementor -> dementor.stopDementor());
 	}
 	
 	public void reset() {

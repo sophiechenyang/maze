@@ -44,7 +44,7 @@ public class DementorController {
 				killDementor();
 				
 			} else if (e.getButton() == MouseButton.SECONDARY){
-				dementorView.stopBeetle();
+				dementorView.stopDementor();
 			}
 		}
 	}
@@ -72,7 +72,7 @@ public class DementorController {
 		//beetleView.setImage(null);
 		
 		if (gameModel.isGameActive()) {
-			dementorView.fadeBeetle(this.dementorView);
+			dementorView.fadeDementor(this.dementorView);
 			dementorModel.setDead(true);
 			gameModel.removeFromBeetleList(dementorModel);
 			gameController.updateBeetleScore();

@@ -29,21 +29,25 @@ public class GameController {
 	private int[][] maze = gameModel.getMaze();
 	Timer timer;
 	private int tileSize = gameModel.getTileSize();
+	private ArrayList<DementorModel> dementorList = gameModel.getDementorList();
 	
 	public GameController(boolean difficulty, int playerType) {
 		gameView.setKeyPressHandler(new events());
 		gameModel.setPlayerType(playerType);
 		gameModel.isAdvanced();
+		
 		startGame();
 	}
 
 	public void startGame() {
 		timer = new Timer();
-
+		
 		//timer.schedule(new CheckWin(), 0, 100);
 		gameModel.setGameActive(true);
 		
-		createPlayer(gameModel.getPlayerType());
+		//createPlayer(gameModel.getPlayerType());
+		
+		playerModel = gameModel.createPlayer(gameModel.getPlayerType());
 
 		for (int y = 0; y < GameModel.getRows(); y++) {
 			for (int x = 0; x < GameModel.getColumns(); x++) {
@@ -53,14 +57,14 @@ public class GameController {
 					createMana(x, y);
 			}
 		}
+		
+		playerView = gameView.createPlayer(playerModel); // This is called after jewels and tiles so player display on top 
 
 		timer.schedule(new RemindTask(), 0, 10000);
 
 	}
 
 	class RemindTask extends TimerTask {
-
-		ArrayList<DementorModel> dementorList = gameModel.getDementorList();
 
 		public void run() {
 			Platform.runLater(() -> {
@@ -155,6 +159,17 @@ public class GameController {
 			if (maze[playerModel.getY()][playerModel.getX()] == 5 && !gameModel.isCodeRetrieved()) {
 				Main.launchSafeScene(gameModel);
 			}
+			
+			//decrease health when running into dementor
+			for (int i =0; i< dementorList.size(); i++) {
+				DementorModel dementor = dementorList.get(i);
+				if (dementor.getX() == playerModel.getX() && dementor.getY() == playerModel.getY()) {
+					System.out.println("caught by dementor");
+					playerModel.reduceHealth(5);
+					gameView.updatePlayerStats(playerModel);
+				}
+			}
+			
 		}
 	}
 

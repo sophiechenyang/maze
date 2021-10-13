@@ -34,8 +34,10 @@ public class DementorView extends ImageView {
 	SequentialTransition sequentialTransition = new SequentialTransition(
 		fadeIn, sequentialOngoing
 	);
-
-	public DementorView(DementorModel beetle) {
+	private int dementorX;
+	private int dementorY;
+	
+	public DementorView(DementorModel dementor) {
 		int tileSize = TileModel.getTileSize();
 		
 		this.setImage(dementorImage);
@@ -43,9 +45,10 @@ public class DementorView extends ImageView {
 		this.setFitHeight(tileSize);
 		setFocusTraversable(true);
 
-		int dementorX = beetle.getX();
-		int dementorY = beetle.getY();
-		int increment = tileSize * 2;
+		dementorX = dementor.getX();
+		dementorY = dementor.getY();
+		int increment = tileSize;
+		//int increment = tileSize * 2;
 		int currentdementorX = dementorX  * tileSize;
 		int currentdementorY = dementorY * tileSize;
 
@@ -53,29 +56,24 @@ public class DementorView extends ImageView {
 		setTranslateY(currentdementorY);
 		
 
-		animateBeetle(currentdementorY, increment);
+		animateDementor(dementor, currentdementorY, increment);
 	}
 	
-	private void animateBeetle(int currentdementorY, int increment) {
+	private void animateDementor(DementorModel dementor, int currentdementorY, int increment) {
 		
 		fadeIn.setFromValue(0.0f);
 		fadeIn.setToValue(0.6f);
 		fadeIn.setCycleCount(1);
-		fadeIn.setAutoReverse(false);
 		
-		goUp.setFromY(currentdementorY);
 		goUp.setToY(currentdementorY - increment);
-		goUp.setAutoReverse(true);
+		dementor.setY(dementorY - 1);
 		
 		rotateTransition.setByAngle(180f);
-		rotateTransition.setAutoReverse(true);
 		
-		goDown.setFromY(currentdementorY - increment);
 		goDown.setToY(currentdementorY);
-		goDown.setAutoReverse(true);
+		dementor.setY(dementorY);
 		
 		rotateTransition2.setByAngle(180f);
-		rotateTransition2.setAutoReverse(true);
 
 		sequentialOngoing.setCycleCount(Timeline.INDEFINITE);
 		
@@ -84,12 +82,12 @@ public class DementorView extends ImageView {
 
 	}
 	
-	public void stopBeetle() {
+	public void stopDementor() {
 		sequentialTransition.stop();
 	}
 	
-	public void fadeBeetle(DementorView beetleview) {
-		FadeTransition fadeOut = new FadeTransition(Duration.millis(1000), beetleview);
+	public void fadeDementor(DementorView dementorview) {
+		FadeTransition fadeOut = new FadeTransition(Duration.millis(1000), dementorview);
 		fadeOut.setFromValue(1.0f);
 		fadeOut.setToValue(0.0f);
 		fadeOut.setCycleCount(1);

@@ -72,4 +72,8 @@ public class PlayerModel{
 		return health;
 	}
 	
+	public void reduceHealth(int num) {
+		health = health - num;
+	}
+	
 }
