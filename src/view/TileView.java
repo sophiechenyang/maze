@@ -16,6 +16,8 @@ public class TileView extends ImageView {
 	private Image grassTile = new Image("file:img/grass_tile.png");
 	private Image wandImage = new Image("file:img/wand.png");
 	private Image snakeImage = new Image("file:img/snake.png");
+	private Image rotateImage = new Image("file:img/book.png");
+	private Image swipeImage = new Image("file:img/bush.png");
 
 	private int tileType;
 
@@ -41,7 +43,18 @@ public class TileView extends ImageView {
 
 			this.setFitWidth(tileSize);
 			this.setFitHeight(tileSize);
+		} else if (tileType == 5) {
+			this.setImage(rotateImage);
+
+			this.setFitWidth(tileSize);
+			this.setFitHeight(tileSize);
+		} else if (tileType == 6) {
+			this.setImage(swipeImage);
+
+			this.setFitWidth(tileSize);
+			this.setFitHeight(tileSize);
 		}
+		
 
 		setTranslateX(tileModel.getX() * tileSize);
 		setTranslateY(tileModel.getY() * tileSize);

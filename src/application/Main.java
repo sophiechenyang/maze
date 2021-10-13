@@ -31,8 +31,8 @@ public class Main extends Application{
         primaryStage.setTitle("HP Maze");
         //primaryStage.show();
         
-        launchGame(true,2);
-        //launchSwipeScene(gameModel);
+        //launchGame(true,2);
+        launchSwipeScene(gameModel);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
@@ -90,7 +90,7 @@ public class Main extends Application{
 	
 	public static void launchSwipeScene(GameModel gameModel) {
 		SwipeScene swipe = new SwipeScene(gameModel);
-		Scene safeScene = new Scene(swipe.makeSwipeScene(), 800, 600);
+		Scene safeScene = new Scene(swipe.makeSwipeScene(), 800, 450);
 		Stage swipeStage = new Stage();
 		swipeStage.setTitle("Swipe away trees");
 		swipeStage.setScene(safeScene);

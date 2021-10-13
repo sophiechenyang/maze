@@ -12,61 +12,155 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.GameModel;
 
 public class SwipeScene {
 	private GameModel gameModel;
-	
+	private boolean isDLeftOutofBounds = false;
+	private boolean isDRightOutofBounds = false;
+	private boolean isDCenterOutofBounds = false;
+	private Button closeButton = new Button("Proceed");
+	private Image instruction = new Image("file:img/swipe_instruction.png");
+	private ImageView instructView = new ImageView(instruction);
+	private Image clear = new Image("file:img/swipe_done.png");
+	private ImageView doneView = new ImageView(clear);
+	private Pane root = new Pane();
+
 	public SwipeScene(GameModel gameModel) {
 		this.gameModel = gameModel;
 	}
-	
+
 	public Parent makeSwipeScene() {
-		//VBox root = new VBox();
-		Pane root = new Pane();
 		
-		Rectangle rect = new Rectangle(100, 100, 100, 100);
-        rect.setFill(Color.DARKMAGENTA);
-        
-		Button closeButton = new Button("Return to Game");
+		Image backgroundImg = new Image("file:img/hedge.jpeg");
+		ImageView bgView = new ImageView(backgroundImg);
+		bgView.setFitWidth(800);
+		bgView.setPreserveRatio(true);
+
+		Image dementorLeft = new Image("file:img/dementor_left.png");
+		ImageView dLeftView = new ImageView(dementorLeft);
+		dLeftView.setX(100);
+		dLeftView.setY(120);
+
+		Image dementorRight = new Image("file:img/dementor_right.png");
+		ImageView dRightView = new ImageView(dementorRight);
+		dRightView.setX(450);
+		dRightView.setY(120);
 		
-		Text text = new Text("Hover over harry and scroll to move it to the upper right corner");
-    	
-    	Image clickImg = new Image("file:img/harry.png");
-    	ImageView clickView = new ImageView(clickImg);
-    	clickView.setFitWidth(200);
-    	clickView.setPreserveRatio(true);
+		Image dementorCenter = new Image("file:img/dementor_up.png");
+		ImageView dCenterView = new ImageView(dementorCenter);
+		dCenterView.setX(350);
+		dCenterView.setY(75);
+
+		closeButton.setLayoutX(400);
+		closeButton.setLayoutY(260);
+		closeButton.setOnMouseClicked(e -> closeWindow());
 		
-    	Image swipeImg = new Image("file:img/safe.jpeg");
-    	ImageView swipeView = new ImageView(swipeImg);
-    	swipeView.setX(70);
-    	swipeView.setFitWidth(500);
-    	swipeView.setPreserveRatio(true);
-    	
-    	swipeView.setOnScrollFinished(new EventHandler<ScrollEvent>(){
-    		@Override public void handle(ScrollEvent event) {
-            	System.out.println(event);
-            	//rect.setTranslateX(rect.getTranslateX() + event.getDeltaX());
-                //rect.setTranslateY(rect.getTranslateY() + event.getDeltaY());
-                rect.setFill(Color.ANTIQUEWHITE);
-                rect.setY(300);
-                
-                
-                
-                if(event.getTotalDeltaX() > 100) {
-                	System.out.println("swiped right");
-                } else if (event.getTotalDeltaX() < -100) {
-                	System.out.println("swiped left");
-                } else if (event.getTotalDeltaY() < -100) {
-                	System.out.println("swiped up");
-                } else if (event.getTotalDeltaY() > 100) {
-                	System.out.println("swiped down");
-                }
-            }	
-            
-        });  
-    	
-    	root.getChildren().addAll(clickView, text, rect, swipeView);
-    	return root; 	
+		instructView.setX(250);
+		instructView.setY(300);
+		
+		doneView.setX(320);
+		doneView.setY(220);
+
+		dLeftView.setOnScrollFinished(new EventHandler<ScrollEvent>() {
+			@Override
+			public void handle(ScrollEvent event) {
+
+				if (event.getTotalDeltaX() > 100) {
+					System.out.println("swiped right");
+					dLeftView.setX(500);
+					isDLeftOutofBounds = true;
+
+				} else if (event.getTotalDeltaX() < -100) {
+					dLeftView.setX(-100);
+					isDLeftOutofBounds = true;
+
+				} else if (event.getTotalDeltaY() < -100) {
+					dLeftView.setY(-120);
+					isDLeftOutofBounds = true;
+				} else if (event.getTotalDeltaY() > 100) {
+					dLeftView.setY(320);
+					isDLeftOutofBounds = true;
+				}
+				
+				if (isDLeftOutofBounds && isDCenterOutofBounds && isDRightOutofBounds) {
+					challengeWon();
+				}
+
+				System.out.println("DLeft: " + isDLeftOutofBounds);
+			}
+		});
+
+		dRightView.setOnScrollFinished(new EventHandler<ScrollEvent>() {
+			@Override
+			public void handle(ScrollEvent event) {
+
+				if (event.getTotalDeltaX() > 100) {
+					System.out.println("swiped right");
+					dRightView.setX(650);
+					isDRightOutofBounds = true;
+
+				} else if (event.getTotalDeltaX() < -100) {
+					dRightView.setX(-100);
+					isDRightOutofBounds = true;
+
+				} else if (event.getTotalDeltaY() < -100) {
+					dRightView.setY(-120);
+					isDRightOutofBounds = true;
+				} else if (event.getTotalDeltaY() > 100) {
+					dRightView.setY(320);
+					isDRightOutofBounds = true;
+				}
+
+				if (isDLeftOutofBounds && isDCenterOutofBounds && isDRightOutofBounds) {
+					challengeWon();
+				}
+				System.out.println("DRight :" + isDRightOutofBounds);
+			}
+		});
+		
+		dCenterView.setOnScrollFinished(new EventHandler<ScrollEvent>() {
+			@Override
+			public void handle(ScrollEvent event) {
+
+				if (event.getTotalDeltaX() > 100) {
+					dCenterView.setX(650);
+					isDCenterOutofBounds = true;
+
+				} else if (event.getTotalDeltaX() < -100) {
+					dCenterView.setX(0);
+					isDCenterOutofBounds = true;
+
+				} else if (event.getTotalDeltaY() < -100) {
+					dCenterView.setY(-210);
+					isDCenterOutofBounds = true;
+				} else if (event.getTotalDeltaY() > 100) {
+					dCenterView.setY(320);
+					isDCenterOutofBounds = true;
+				}
+				
+				if (isDLeftOutofBounds && isDCenterOutofBounds && isDRightOutofBounds) {
+					challengeWon();
+				}
+
+				System.out.println("DCenter :" + isDCenterOutofBounds);
+			}
+		});
+
+		root.getChildren().addAll(bgView, dLeftView, dRightView, dCenterView, instructView);
+		return root;
+	}
+	
+	public void challengeWon() {
+		instructView.setImage(null);
+		root.getChildren().addAll(doneView, closeButton);
+		gameModel.setClearedDementors(true);
+		System.out.println("challenge won!");
+	}
+	
+	private void closeWindow() {
+		Stage stage = (Stage) closeButton.getScene().getWindow();
+		stage.close();
 	}
 }

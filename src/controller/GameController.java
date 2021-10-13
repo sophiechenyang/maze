@@ -160,6 +160,10 @@ public class GameController {
 				Main.launchSafeScene(gameModel);
 			}
 			
+			if (maze[playerModel.getY()][playerModel.getX()] == 6 && !gameModel.isClearedDementors()) {
+				Main.launchSwipeScene(gameModel);
+			}
+			
 			//decrease health when running into dementor
 			for (int i =0; i< dementorList.size(); i++) {
 				DementorModel dementor = dementorList.get(i);

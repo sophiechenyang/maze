@@ -16,12 +16,12 @@ public class GameModel extends Parent {
 			{ 1, 0, 1, 0, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1 },
 			{ 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-			{ 1, 3, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1 },
+			{ 1, 3, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 5, 1 },
 			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1 }, 
-			{ 1, 5, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
-			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1 }, 
+			{ 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
+			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 6, 1, 1, 1 }, 
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
-			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1 },
+			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
 			{ 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }};
 
@@ -36,7 +36,8 @@ public class GameModel extends Parent {
 	// microgames
 	private boolean snakeDefeated = false;
 	private boolean wandRetrieved = false;
-	private boolean codeRetrieved = false; 
+	private boolean codeRetrieved = false;
+	private boolean clearedDementors = false;
 	
 	public PlayerModel createPlayer(int playerType) {
 		if (playerType == 0) {
@@ -196,6 +197,16 @@ public class GameModel extends Parent {
 
 	public void setCodeRetrieved(boolean codeRetrieved) {
 		this.codeRetrieved = codeRetrieved;
+	}
+
+
+	public boolean isClearedDementors() {
+		return clearedDementors;
+	}
+
+
+	public void setClearedDementors(boolean clearedDementors) {
+		this.clearedDementors = clearedDementors;
 	}
 
 
