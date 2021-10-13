@@ -29,7 +29,7 @@ public class GameModel extends Parent {
 	private boolean gameWon = false;
 	private boolean gameOver = false;
 	private boolean gameActive = false;
-	private ArrayList<DementorModel> beetleList = new ArrayList<DementorModel>(); 
+	private ArrayList<DementorModel> dementorList = new ArrayList<DementorModel>(); 
 	private int playerType = 0;
 	private boolean isAdvanced = false; 
 	
@@ -60,10 +60,10 @@ public class GameModel extends Parent {
 	}
 	
 	
-	public DementorModel createBeatle() {
-		DementorModel beetle = new DementorModel(generateRand(), generateRand());
-		beetleList.add(beetle);
-		return beetle;
+	public DementorModel createDementor() {
+		DementorModel dementor = new DementorModel(generateRand(), generateRand());
+		dementorList.add(dementor);
+		return dementor;
 	}
 
 	public ManaModel createTreasure(int x, int y) {
@@ -103,7 +103,7 @@ public class GameModel extends Parent {
 	}
 	
 	public void reset() {
-		beetleList.clear();
+		dementorList.clear();
 		gamePoints = 0;
 
 		gameWon = false;
@@ -132,12 +132,12 @@ public class GameModel extends Parent {
 		this.gameOver = gameOver;
 	}
 
-	public ArrayList getBeetleList() {
-		return beetleList;
+	public ArrayList getDementorList() {
+		return dementorList;
 	}
 
 	public void removeFromBeetleList(DementorModel beetleModel) {
-		beetleList.remove(beetleModel);
+		dementorList.remove(beetleModel);
 	}
 
 	public boolean isGameActive() {

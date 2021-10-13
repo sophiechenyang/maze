@@ -33,7 +33,7 @@ public class ManaController {
 				manaView.collectTreasure();
 				//gameModel.increaseGamePointsBy(50);
 				//gameView.updateScore(gameModel);
-				playerModel.increaseMana();
+				playerModel.increaseMana(5);
 				gameView.updatePlayerStats(playerModel);
 			}
 		}

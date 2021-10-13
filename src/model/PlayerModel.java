@@ -52,8 +52,12 @@ public class PlayerModel{
 		return name;
 	}
 	
-	public void increaseMana() {
-		mana += 5;
+	public void increaseMana(int num) {
+		mana = mana + num;
+	}
+	
+	public void decreaseMana(int num) {
+		mana = mana - num;
 	}
 	
 	public String getHouse() {

@@ -39,7 +39,7 @@ public class GameController {
 
 	public void startGame() {
 		timer = new Timer();
-		//timer.schedule(new RemindTask(), 0, 10000);
+
 		//timer.schedule(new CheckWin(), 0, 100);
 		gameModel.setGameActive(true);
 		
@@ -50,24 +50,24 @@ public class GameController {
 				TileModel tile = gameModel.createTile(x, y);
 				TileView tileView = gameView.createTile(tile, maze[y][x]);
 				if (tile.isHasTreasure() && maze[y][x] == 0)
-					createTreasure(x, y);
+					createMana(x, y);
 			}
 		}
 
-		
+		timer.schedule(new RemindTask(), 0, 10000);
 
 	}
 
 	class RemindTask extends TimerTask {
 
-		ArrayList<DementorModel> beetleList = gameModel.getBeetleList();
+		ArrayList<DementorModel> dementorList = gameModel.getDementorList();
 
 		public void run() {
 			Platform.runLater(() -> {
-				int beetleCount = beetleList.size();
+				int dementorCount = dementorList.size();
 
-				if (beetleCount < 20) {
-					createBeetle();
+				if (dementorCount < 20) {
+					createDementor();
 				} else {
 					setGameOver();
 				}
@@ -91,13 +91,13 @@ public class GameController {
 		playerView = gameView.createPlayer(playerModel);
 	}
 
-	public void createBeetle() {
-		DementorModel dementorModel = gameModel.createBeatle();
+	public void createDementor() {
+		DementorModel dementorModel = gameModel.createDementor();
 		DementorView dementorView = gameView.createDementor(dementorModel, gameModel);
-		DementorController dementorController = new DementorController(dementorModel, dementorView, gameModel, this);
+		DementorController dementorController = new DementorController(dementorModel, dementorView, gameModel, gameView, this, playerModel);
 	}
 
-	void createTreasure(int x, int y) {
+	void createMana(int x, int y) {
 		ManaModel treasure = gameModel.createTreasure(x, y);
 		ManaView manaView = gameView.createTreasure(treasure);
 		ManaController manaController = new ManaController(treasure, manaView, gameModel, gameView, playerModel);
