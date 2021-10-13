@@ -31,8 +31,6 @@ public class ManaController {
 			if (gameModel.isGameActive() == true) {
 				manaView.setCursor(Cursor.CLOSED_HAND);
 				manaView.collectTreasure();
-				//gameModel.increaseGamePointsBy(50);
-				//gameView.updateScore(gameModel);
 				playerModel.increaseMana(5);
 				gameView.updatePlayerStats(playerModel);
 			}
