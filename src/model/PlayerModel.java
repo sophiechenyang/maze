@@ -6,9 +6,9 @@ public class PlayerModel{
 	private int playerIndex;
 	protected int mana;
 	private String playerURL;
-	protected String[] houseList = {"Gryfindor", "Ravenclaw", "Hufflepuff", "Slytherin"};
+	protected String[] houseList = {"Gryfindor", "Ravenclaw", "Hufflepuff", "Slytherin", "Dobby"};
 	protected String house;
-	protected String[] charList = {"Harry Potter", "Ron Weasley", "Hermione Granger", "Draco Malfoy"};
+	protected String[] charList = {"Harry Potter", "Ron Weasley", "Hermione Granger", "Draco Malfoy", "Dobby"};
 	protected String name;
 	protected int health;
 	

@@ -8,6 +8,7 @@ public class HarryModel extends PlayerModel {
 		setPlayerURL("file:img/harry.png");
 		house = houseList[0];
 		name = charList[0];
+		health = 80;
 	}
 
 

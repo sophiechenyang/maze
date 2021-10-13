@@ -8,7 +8,7 @@ public class DracoModel extends PlayerModel {
 		setPlayerURL("file:img/draco.png");
 		house = houseList[3];
 		name = charList[3];
-		health = 50;
+		health = 60;
 	}
 
 

@@ -8,6 +8,7 @@ public class RonModel extends PlayerModel {
 		setPlayerURL("file:img/ron.png");
 		house = houseList[0];
 		name = charList[1];
+		health = 70;
 	}
 
 

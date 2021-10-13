@@ -42,20 +42,17 @@ public class GameModel extends Parent {
 		if (playerType == 0) {
 			HarryModel player = new HarryModel(0);
 			return player;
-		} 
-			
-		if (playerType == 1) {
-			RonModel player = new RonModel(1);
+		} else if (playerType == 1) {
+			RonModel player = new RonModel(playerType);
 			return player;
-		}
-		
-		if (playerType == 2) {
-			HermioneModel player = new HermioneModel(2);
+		} else if (playerType == 2) {
+			HermioneModel player = new HermioneModel(playerType);
 			return player;
-		}
-		
-		if (playerType == 3) {
-			DracoModel player = new DracoModel(3);
+		} else if (playerType == 3) {
+			DracoModel player = new DracoModel(playerType);
+			return player;
+		} else if (playerType == 4) {
+			DobbyModel player = new DobbyModel(playerType);
 			return player;
 		}
 		

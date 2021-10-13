@@ -31,7 +31,7 @@ public class Main extends Application{
         primaryStage.setTitle("HP Maze");
         //primaryStage.show();
         
-        launchGame(true,3);
+        launchGame(true,4);
         //launchSwipeScene(gameModel);
         
         // stop application on window close
