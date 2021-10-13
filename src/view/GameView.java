@@ -100,6 +100,10 @@ public class GameView extends Parent{
 		gameScore.setText(Integer.toString(gameModel.getGamePoints())); ;
 	}
 	
+	public void updatePlayerStats(PlayerModel playerModel) {
+		manaCount.setText(Integer.toString(playerModel.getMana()));
+		healthCount.setText(Integer.toString(playerModel.getHealth()));
+	}
 	// Game Title
 	public Pane createHeader() {
 		Pane header = new Pane();

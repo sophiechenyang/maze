@@ -42,6 +42,8 @@ public class GameController {
 		//timer.schedule(new RemindTask(), 0, 10000);
 		//timer.schedule(new CheckWin(), 0, 100);
 		gameModel.setGameActive(true);
+		
+		createPlayer(gameModel.getPlayerType());
 
 		for (int y = 0; y < GameModel.getRows(); y++) {
 			for (int x = 0; x < GameModel.getColumns(); x++) {
@@ -52,7 +54,7 @@ public class GameController {
 			}
 		}
 
-		createPlayer(gameModel.getPlayerType());
+		
 
 	}
 
@@ -98,7 +100,7 @@ public class GameController {
 	void createTreasure(int x, int y) {
 		ManaModel treasure = gameModel.createTreasure(x, y);
 		ManaView manaView = gameView.createTreasure(treasure);
-		ManaController manaController = new ManaController(treasure, manaView, gameModel, gameView);
+		ManaController manaController = new ManaController(treasure, manaView, gameModel, gameView, playerModel);
 	}
 
 	class resetGameEvent implements EventHandler<MouseEvent> {

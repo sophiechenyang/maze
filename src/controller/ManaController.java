@@ -5,6 +5,7 @@ import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import model.GameModel;
 import model.ManaModel;
+import model.PlayerModel;
 import view.GameView;
 import view.ManaView;
 
@@ -13,12 +14,14 @@ public class ManaController {
 	private ManaView manaView;
 	private GameModel gameModel;
 	private GameView gameView;
+	private PlayerModel playerModel;
 
-	public ManaController(ManaModel manaModel, ManaView manaView, GameModel gameModel, GameView gameView) {
+	public ManaController(ManaModel manaModel, ManaView manaView, GameModel gameModel, GameView gameView, PlayerModel playerModel) {
 		this.manaModel = manaModel;
 		this.manaView = manaView;
 		this.gameModel = gameModel;
 		this.gameView = gameView;
+		this.playerModel = playerModel;
 		this.manaView.setPlayerHandler(new detectDrag());
 	}
 
@@ -28,8 +31,10 @@ public class ManaController {
 			if (gameModel.isGameActive() == true) {
 				manaView.setCursor(Cursor.CLOSED_HAND);
 				manaView.collectTreasure();
-				gameModel.increaseGamePointsBy(50);
-				gameView.updateScore(gameModel);
+				//gameModel.increaseGamePointsBy(50);
+				//gameView.updateScore(gameModel);
+				playerModel.increaseMana();
+				gameView.updatePlayerStats(playerModel);
 			}
 		}
 	}

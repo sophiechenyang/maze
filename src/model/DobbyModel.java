@@ -8,7 +8,7 @@ public class DobbyModel extends PlayerModel {
 		setPlayerURL("file:img/dobby.png");
 		house = houseList[4];
 		name = charList[4];
-		health = 40;
+		health = 60;
 	}
 
 
