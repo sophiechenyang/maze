@@ -42,6 +42,10 @@ public class ManaView extends ImageView {
 		this.setOnDragDetected(detectDrag);
 	}
 	
+	public void hoverHandler(EventHandler<MouseEvent> detectHover) {
+		this.setOnMouseEntered(detectHover);
+	}
+	
 	public void collectTreasure() {
 		
 		int newX = GameModel.getColumns() * tileSize;

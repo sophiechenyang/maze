@@ -23,6 +23,14 @@ public class ManaController {
 		this.gameView = gameView;
 		this.playerModel = playerModel;
 		this.manaView.setPlayerHandler(new detectDrag());
+		this.manaView.hoverHandler(new hoverDementor());
+	}
+	
+	class hoverDementor implements EventHandler<MouseEvent>{
+		@Override
+		public void handle(MouseEvent e) {
+			manaView.setCursor(Cursor.OPEN_HAND);
+		}
 	}
 
 	class detectDrag implements EventHandler<MouseEvent> {
