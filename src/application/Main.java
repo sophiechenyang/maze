@@ -11,6 +11,7 @@ import scene.WandScene;
 import scene.SafeScene;
 import scene.SnakeScene;
 import scene.SwipeScene;
+import scene.VoldemortScene;
 import controller.GameController;
 
 public class Main extends Application{
@@ -31,8 +32,9 @@ public class Main extends Application{
         primaryStage.setTitle("HP Maze");
         //primaryStage.show();
         
-        //launchGame(true,2);
-        launchSwipeScene(gameModel);
+        launchGame(true,2);
+        //launchSwipeScene(gameModel);
+        //launchVoldemortScene(gameModel);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
@@ -95,5 +97,14 @@ public class Main extends Application{
 		swipeStage.setTitle("Swipe away trees");
 		swipeStage.setScene(safeScene);
 		swipeStage.show();	
+	}
+	
+	public static void launchVoldemortScene(GameModel gameModel) {
+		VoldemortScene voldemort = new VoldemortScene(gameModel);
+		Scene voldemortScene = new Scene(voldemort.makeVoldemortScene(), 800, 450);
+		Stage voldemortStage = new Stage();
+		voldemortStage.setTitle("Defeat Voldemort");
+		voldemortStage.setScene(voldemortScene);
+		voldemortStage.show();	
 	}
 }

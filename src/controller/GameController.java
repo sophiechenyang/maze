@@ -30,6 +30,7 @@ public class GameController {
 	Timer timer;
 	private int tileSize = gameModel.getTileSize();
 	private ArrayList<DementorModel> dementorList = gameModel.getDementorList();
+	private ArrayList<TileView> tileViewList = gameView.getTileViewList();
 	
 	public GameController(boolean difficulty, int playerType) {
 		gameView.setKeyPressHandler(new events());
@@ -143,7 +144,7 @@ public class GameController {
 				return;
 			}
 			
-			if (playerModel.getX() == 1 && playerModel.getY() == 7) {
+			if (playerModel.getX() == 13 && playerModel.getY() == 10) {
 				gameModel.setGameWon(true);
 				System.out.println("Game won:" + gameModel.isGameWon());
 			}
@@ -164,6 +165,29 @@ public class GameController {
 				Main.launchSwipeScene(gameModel);
 			}
 			
+			if (maze[playerModel.getY()][playerModel.getX()] == 7) {
+				Main.launchVoldemortScene(gameModel);
+			}
+			
+			
+			// TO DO: fix this to refer to the square that has the 3
+			if (gameModel.isSnakeDefeated()) {
+				
+				//TileView tile = tileViewList[2][3];
+				
+				System.out.println(gameModel.isSnakeDefeated());
+				tileViewList.forEach((tileView) -> {
+					
+					// 
+					
+					// get tileModel of the tile that has the 3 in the maze, and turn off it's tile view
+//					if (maze[playerModel.getY()][playerModel.getX()]==3) {
+//						tileView.setImage(null);
+//					}
+				});
+			}
+				
+				
 			//decrease health when running into dementor
 			for (int i =0; i< dementorList.size(); i++) {
 				DementorModel dementor = dementorList.get(i);

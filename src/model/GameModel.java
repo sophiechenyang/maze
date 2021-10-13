@@ -21,8 +21,8 @@ public class GameModel extends Parent {
 			{ 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
 			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 6, 1, 1, 1 }, 
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
-			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
-			{ 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
+			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1 },
+			{ 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }};
 
 	private int numOfTiles = ROWS * COLUMNS;
@@ -208,6 +208,5 @@ public class GameModel extends Parent {
 	public void setClearedDementors(boolean clearedDementors) {
 		this.clearedDementors = clearedDementors;
 	}
-
 
 }

@@ -18,6 +18,7 @@ public class TileView extends ImageView {
 	private Image snakeImage = new Image("file:img/snake.png");
 	private Image rotateImage = new Image("file:img/book.png");
 	private Image swipeImage = new Image("file:img/bush.png");
+	private Image voldemortImage = new Image("file:img/voldemort.png");
 
 	private int tileType;
 
@@ -53,6 +54,16 @@ public class TileView extends ImageView {
 
 			this.setFitWidth(tileSize);
 			this.setFitHeight(tileSize);
+		}else if (tileType == 7) {
+			this.setImage(voldemortImage);
+
+			this.setFitWidth(tileSize);
+			this.setFitHeight(tileSize);
+		}else if (tileType == 8) {
+			this.setImage(tileImage);
+
+			this.setFitWidth(tileSize);
+			this.setFitHeight(tileSize);
 		}
 		
 
@@ -63,6 +74,10 @@ public class TileView extends ImageView {
 
 	public void setPlayerHandler(EventHandler<MouseEvent> listenForClick) {
 		this.setOnMouseClicked(listenForClick);
+	}
+	
+	public void updateTileView() {
+		this.setImage(null);
 	}
 	
 }

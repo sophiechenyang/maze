@@ -44,6 +44,7 @@ public class GameView extends Parent{
 	
 	Pane pane = new Pane();
 	private ArrayList<DementorView> dementorViewList = new ArrayList<DementorView>();
+	private ArrayList<TileView> tileViewList = new ArrayList<TileView>();
 	
 	public GameView() {
 		BorderPane root = new BorderPane();
@@ -64,6 +65,7 @@ public class GameView extends Parent{
 	public TileView createTile(TileModel tileModel, int tileType) {
 		TileView tileView = new TileView(tileModel, tileType);
 		pane.getChildren().add(tileView);
+		tileViewList.add(tileView);
 		return tileView;	
 	}
 	
@@ -209,6 +211,10 @@ public class GameView extends Parent{
 	
 	public void setKeyReleaseHandler(EventHandler<KeyEvent> deactivateAmulet) {
 		this.setOnKeyReleased(deactivateAmulet);
+	}
+	
+	public ArrayList<TileView> getTileViewList() {
+		return tileViewList;
 	}
 
 
