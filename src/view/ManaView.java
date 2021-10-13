@@ -9,32 +9,32 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import model.GameModel;
-import model.TreasureModel;
+import model.ManaModel;
 
-public class TreasureView extends ImageView {
-	private Image treasureImage = new Image("file:img/gem.png");
+public class ManaView extends ImageView {
+	private Image manaImage = new Image("file:img/mana.png");
 	private int imageSize = 30;
-	private int currentTreasureX;
-	private int currentTreasureY;
+	private int currentManaX;
+	private int currentManaY;
 
 	int tileSize = GameModel.getTileSize();
 	int offset = ( tileSize - imageSize ) / 2;
 	
-	public TreasureView(TreasureModel treasure) {
-		this.setImage(treasureImage);
+	public ManaView(ManaModel treasure) {
+		this.setImage(manaImage);
 		this.setFitWidth(imageSize);
 		this.setFitHeight(imageSize);
 		
 		int treasureX = treasure.getX();
 		int treasureY = treasure.getY();
 		
-		currentTreasureX = offset + treasureX * tileSize;
-		currentTreasureY = offset + treasureY * tileSize;
+		currentManaX = offset + treasureX * tileSize;
+		currentManaY = offset + treasureY * tileSize;
 		
 		setFocusTraversable(true);
 		
-		setTranslateX(currentTreasureX);
-		setTranslateY(currentTreasureY);
+		setTranslateX(currentManaX);
+		setTranslateY(currentManaY);
 		
 	}
 
@@ -47,9 +47,9 @@ public class TreasureView extends ImageView {
 		int newX = GameModel.getColumns() * tileSize;
 		
 		TranslateTransition moveTreasure = new TranslateTransition(Duration.millis(500), this);
-		moveTreasure.setFromY(currentTreasureY);
+		moveTreasure.setFromY(currentManaY);
 		moveTreasure.setToY(0);
-		moveTreasure.setFromX(currentTreasureX);
+		moveTreasure.setFromX(currentManaX);
 		moveTreasure.setToX(newX);
 		moveTreasure.setCycleCount(1);
 		

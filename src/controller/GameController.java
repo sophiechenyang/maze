@@ -14,12 +14,12 @@ import model.DementorModel;
 import model.GameModel;
 import model.PlayerModel;
 import model.TileModel;
-import model.TreasureModel;
+import model.ManaModel;
 import view.DementorView;
 import view.GameView;
 import view.PlayerView;
 import view.TileView;
-import view.TreasureView;
+import view.ManaView;
 
 public class GameController {
 	private GameView gameView = new GameView();
@@ -39,7 +39,7 @@ public class GameController {
 
 	public void startGame() {
 		timer = new Timer();
-		timer.schedule(new RemindTask(), 0, 10000);
+		//timer.schedule(new RemindTask(), 0, 10000);
 		//timer.schedule(new CheckWin(), 0, 100);
 		gameModel.setGameActive(true);
 
@@ -90,15 +90,15 @@ public class GameController {
 	}
 
 	public void createBeetle() {
-		DementorModel beetle = gameModel.createBeatle();
-		DementorView dementorView = gameView.createBeatle(beetle, gameModel);
-		DementorController dementorController = new DementorController(beetle, dementorView, gameModel, this);
+		DementorModel dementorModel = gameModel.createBeatle();
+		DementorView dementorView = gameView.createDementor(dementorModel, gameModel);
+		DementorController dementorController = new DementorController(dementorModel, dementorView, gameModel, this);
 	}
 
 	void createTreasure(int x, int y) {
-		TreasureModel treasure = gameModel.createTreasure(x, y);
-		TreasureView treasureView = gameView.createTreasure(treasure);
-		TreasureController treasureController = new TreasureController(treasure, treasureView, gameModel, gameView);
+		ManaModel treasure = gameModel.createTreasure(x, y);
+		ManaView manaView = gameView.createTreasure(treasure);
+		ManaController manaController = new ManaController(treasure, manaView, gameModel, gameView);
 	}
 
 	class resetGameEvent implements EventHandler<MouseEvent> {

@@ -21,7 +21,9 @@ public class GameModel extends Parent {
 			{ 1, 5, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
 			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1 }, 
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
-			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1 } };
+			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1 },
+			{ 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }};
 
 	private int numOfTiles = ROWS * COLUMNS;
 	private boolean gameWon = false;
@@ -67,8 +69,8 @@ public class GameModel extends Parent {
 		return beetle;
 	}
 
-	public TreasureModel createTreasure(int x, int y) {
-		TreasureModel treasure = new TreasureModel(x, y);
+	public ManaModel createTreasure(int x, int y) {
+		ManaModel treasure = new ManaModel(x, y);
 		return treasure;
 	}
 	

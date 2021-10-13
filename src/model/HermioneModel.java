@@ -7,6 +7,7 @@ public class HermioneModel extends PlayerModel {
 		mana = 20;
 		setPlayerURL("file:img/hermione.png");
 		house = houseList[0];
+		name = charList[2];
 	}
 
 

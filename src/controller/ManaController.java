@@ -4,30 +4,30 @@ import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import model.GameModel;
-import model.TreasureModel;
+import model.ManaModel;
 import view.GameView;
-import view.TreasureView;
+import view.ManaView;
 
-public class TreasureController {
-	private TreasureModel treasureModel;
-	private TreasureView treasureView;
+public class ManaController {
+	private ManaModel manaModel;
+	private ManaView manaView;
 	private GameModel gameModel;
 	private GameView gameView;
 
-	public TreasureController(TreasureModel treasureModel, TreasureView treasureView, GameModel gameModel, GameView gameView) {
-		this.treasureModel = treasureModel;
-		this.treasureView = treasureView;
+	public ManaController(ManaModel manaModel, ManaView manaView, GameModel gameModel, GameView gameView) {
+		this.manaModel = manaModel;
+		this.manaView = manaView;
 		this.gameModel = gameModel;
 		this.gameView = gameView;
-		this.treasureView.setPlayerHandler(new detectDrag());
+		this.manaView.setPlayerHandler(new detectDrag());
 	}
 
 	class detectDrag implements EventHandler<MouseEvent> {
 		@Override
 		public void handle(MouseEvent e) {
 			if (gameModel.isGameActive() == true) {
-				treasureView.setCursor(Cursor.CLOSED_HAND);
-				treasureView.collectTreasure();
+				manaView.setCursor(Cursor.CLOSED_HAND);
+				manaView.collectTreasure();
 				gameModel.increaseGamePointsBy(50);
 				gameView.updateScore(gameModel);
 			}

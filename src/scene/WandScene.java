@@ -50,7 +50,7 @@ public class WandScene {
             		wandView.setImage(null);
             		gameModel.setWandRetrieved(true);
             		closeButton.setOnMouseClicked(e -> closeWindow());
-            		root.getChildren().add(closeButton);
+            		root.getChildren().addAll(closeButton);
             	}
                 
                 System.out.println(harryView.getTranslateX());

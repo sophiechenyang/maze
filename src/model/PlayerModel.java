@@ -8,6 +8,9 @@ public class PlayerModel{
 	private String playerURL;
 	protected String[] houseList = {"Gryfindor", "Ravenclaw", "Hufflepuff", "Slytherin"};
 	protected String house;
+	protected String[] charList = {"Harry Potter", "Ron Weasley", "Hermione Granger", "Draco Malfoy"};
+	protected String name;
+	protected int health;
 	
 	public PlayerModel(int playerIndex) {
 		this.setPlayerIndex(playerIndex);
@@ -44,6 +47,21 @@ public class PlayerModel{
 	public void setPlayerURL(String playerURL) {
 		this.playerURL = playerURL;
 	}
+	
+	public String getPlayerName() {
+		return name;
+	}
+	
+	public String getHouse() {
+		return house;
+	}
+	
+	public int getMana() {
+		return mana;
+	}
 
+	public int getHealth() {
+		return health;
+	}
 	
 }

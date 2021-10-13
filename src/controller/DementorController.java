@@ -34,7 +34,7 @@ public class DementorController {
 				if (dementorModel.isDead())
 					return;
 				
-				killBeetle();
+				killDementor();
 				
 			} else if (e.getButton() == MouseButton.SECONDARY){
 				dementorView.stopBeetle();
@@ -52,7 +52,7 @@ public class DementorController {
 		}
 	}
 	
-	private void killBeetle() {
+	private void killDementor() {
 		//beetleView.setImage(null);
 		
 		if (gameModel.isGameActive()) {

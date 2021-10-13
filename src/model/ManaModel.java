@@ -1,9 +1,9 @@
 package model;
 
-public class TreasureModel extends GameModel {
+public class ManaModel extends GameModel {
 	private int x, y;
 	
-	public TreasureModel(int x, int y) {
+	public ManaModel(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}

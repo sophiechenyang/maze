@@ -27,10 +27,10 @@ public class TileView extends ImageView {
 			this.setFitWidth(tileSize);
 			this.setFitHeight(tileSize);
 		} else if (tileType == 0) {
-			this.setImage(tileImage);
+			//this.setImage(tileImage);
 
-			this.setFitWidth(tileSize);
-			this.setFitHeight(tileSize);
+			//this.setFitWidth(tileSize);
+			//this.setFitHeight(tileSize);
 		} else if (tileType == 3) {
 			this.setImage(snakeImage);
 

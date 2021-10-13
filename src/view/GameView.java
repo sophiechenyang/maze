@@ -24,24 +24,39 @@ import model.DementorModel;
 import model.GameModel;
 import model.PlayerModel;
 import model.TileModel;
-import model.TreasureModel;
+import model.ManaModel;
 
 public class GameView extends Parent{	
 	
-	int rows = GameModel.getRows();
-	int columns = GameModel.getColumns();
-	int tileSize = GameModel.getTileSize();
-	Text gameScore = new Text("0");
-	Text jewelScore = new Text("0");
+	private int rows = GameModel.getRows();
+	private int columns = GameModel.getColumns();
+	private int tileSize = GameModel.getTileSize();
+	private int sidePaneWidth = 150;
+	private Text gameScore = new Text("0");
+	private Text playerName = new Text("");
+	private Text playerHouse = new Text("");	
+	private String name;
+	private String house;
+	private Text manaCount = new Text("0");
+	private int mana;
+	private Text healthCount = new Text("0");
+	private int health;
+	
 	Pane pane = new Pane();
 	private ArrayList<DementorView> beetleViewList = new ArrayList<DementorView>();
 	
 	public GameView() {
 		BorderPane root = new BorderPane();
+		root.setStyle("-fx-background-color: green;");
+		root.setPrefWidth(sidePaneWidth *2 + columns * tileSize);
+		root.setPrefHeight(900);
+		pane.setPrefSize(600, 200);
+		pane.setStyle("-fx-background-color: #324530;");
 
 		root.setTop(createHeader());
 		root.setCenter(pane);
 		root.setRight(createRightPanel());
+		root.setLeft(createLeftPanel());
 		
 		this.getChildren().add(root);
 	}
@@ -53,22 +68,32 @@ public class GameView extends Parent{
 	}
 	
 	public PlayerView createPlayer(PlayerModel player) {
-		PlayerView playerView = new PlayerView(player);	
+		PlayerView playerView = new PlayerView(player);
+		name = player.getPlayerName();
+		house = player.getHouse();
+		mana = player.getMana();
+		health = player.getHealth();
+		
+		playerName.setText(name);
+		playerHouse.setText(house);
+		manaCount.setText(Integer.toString(mana));
+		healthCount.setText(Integer.toString(health));
+		
 		pane.getChildren().addAll(playerView);
 		return playerView;
 	}
 	
-	public DementorView createBeatle(DementorModel beetlemodel, GameModel gameModel) {
-		DementorView dementorView = new DementorView(beetlemodel);
+	public DementorView createDementor(DementorModel dementorModel, GameModel gameModel) {
+		DementorView dementorView = new DementorView(dementorModel);
 		pane.getChildren().add(dementorView);
 		beetleViewList.add(dementorView);
 		return dementorView;
 	}
 	
-	public TreasureView createTreasure(TreasureModel treasureModel) {
-		TreasureView treasureView = new TreasureView(treasureModel);
-		pane.getChildren().add(treasureView);
-		return treasureView;
+	public ManaView createTreasure(ManaModel manaModel) {
+		ManaView manaView = new ManaView(manaModel);
+		pane.getChildren().add(manaView);
+		return manaView;
 	}
 
 	public void updateScore (GameModel gameModel) {
@@ -76,12 +101,13 @@ public class GameView extends Parent{
 	}
 	
 	// Game Title
-	public StackPane createHeader() {
-		StackPane header = new StackPane();
+	public Pane createHeader() {
+		Pane header = new Pane();
+		header.setStyle("-fx-background-color: green;");
 		
 		Image topPaneImg = new Image("file:img/title.png");
 		ImageView topPaneView = new ImageView(topPaneImg);
-		topPaneView.setFitWidth(800);
+		topPaneView.setFitWidth(750);
 		topPaneView.setFitHeight(100);
 		
 		//header.getStyleClass().add("header");
@@ -91,34 +117,55 @@ public class GameView extends Parent{
 		
 	}
 	
-	public StackPane createLeftPanel() {
-		StackPane leftcontainer = new StackPane();
+	public Pane createLeftPanel() {
+		Pane leftcontainer = new Pane();
+		leftcontainer.setStyle("-fx-background-color: green;");
+		leftcontainer.setPrefWidth(sidePaneWidth);
 				
 		Image leftPaneImg = new Image("file:img/leftPane.png");
 		ImageView leftPaneView = new ImageView(leftPaneImg);
 		
-		Image fire = new Image("file:img/fire.gif");
-		ImageView fireView = new ImageView(fire);
-		fireView.setFitWidth(70);
-		fireView.setPreserveRatio(true);
+		leftPaneView.setFitWidth(100);
+		leftPaneView.setFitHeight(500);
 		
-		leftPaneView.setFitWidth(400);
-		leftPaneView.setFitHeight(460);
-		
-		leftcontainer.getChildren().addAll(leftPaneView, fireView);
+		//leftcontainer.getChildren().addAll(leftPaneView);
 		return leftcontainer;
 	}
 	
 
 	public VBox createRightPanel() {
 		VBox rightcontainer = new VBox();
+		rightcontainer.setStyle("-fx-background-color: yellow;");
+		rightcontainer.setPrefWidth(sidePaneWidth);
+		rightcontainer.setPadding(new Insets(15, 12, 15, 12));
+		rightcontainer.setSpacing(10);
 		
-		rightcontainer.getChildren().addAll(gameScore, jewelScore);
+		VBox characterBox = new VBox();
+		//Text charName = new Text("Name:");
+		
+		HBox houseGroup = new HBox();
+		Text houseText = new Text("House: ");
+		houseGroup.getChildren().addAll(houseText, playerHouse);
+		characterBox.getChildren().addAll(playerName, houseGroup);
+		
+		VBox charStats = new VBox();
+		HBox manaGroup = new HBox();
+		Text manaText = new Text("mana: ");
+		HBox healthGroup = new HBox();
+		Text healthText = new Text("health: ");
+		healthGroup.getChildren().addAll(healthText, healthCount);
+		manaGroup.getChildren().addAll(manaText, manaCount);
+		
+		charStats.getChildren().addAll(manaGroup, healthGroup);
+		
+		rightcontainer.getChildren().addAll(characterBox, charStats);
 		return rightcontainer;
 	}
 	
 	public Pane createBottomPane() {
 		HBox bottomcontainer = new HBox();
+		bottomcontainer.setPrefHeight(200);
+		bottomcontainer.setStyle("-fx-background-color: green;");
 		Image bottomPaneImg = new Image("file:img/bottomPane.png");
 		ImageView bottomPaneView = new ImageView(bottomPaneImg);
 		bottomPaneView.setFitWidth(1160);
@@ -145,7 +192,7 @@ public class GameView extends Parent{
 	public void reset() {
 		pane.getChildren().clear();
 		gameScore.setText("0");
-		jewelScore.setText("0");
+		manaCount.setText("0");
 	}
 	
 	public void clickResetButton(Button button, EventHandler<MouseEvent> startGame) {

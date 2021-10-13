@@ -1,5 +1,6 @@
 package scene;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;

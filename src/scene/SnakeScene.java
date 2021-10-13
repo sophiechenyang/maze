@@ -39,8 +39,9 @@ public class SnakeScene {
             	if (naginiView.getScaleX() < 0.1);
             		text.setText("Now the snake is harmless");
             		gameModel.setSnakeDefeated(true);
-            		root.getChildren().add(closeButton);
+            		
             		closeButton.setOnMouseClicked(e -> closeWindow());
+            		root.getChildren().addAll(closeButton);
             
             }
             

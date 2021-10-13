@@ -10,6 +10,7 @@ import setup.setUpApp;
 import scene.WandScene;
 import scene.SafeScene;
 import scene.SnakeScene;
+import scene.SwipeScene;
 import controller.GameController;
 
 public class Main extends Application{
@@ -31,7 +32,7 @@ public class Main extends Application{
         //primaryStage.show();
         
         launchGame(true,3);
-        //launchSafeScene(gameModel);
+        //launchSwipeScene(gameModel);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
@@ -50,7 +51,7 @@ public class Main extends Application{
 		Pane root = new Pane();
         GameController controller = new GameController(difficulty, playerType);
         root.getChildren().add(controller.getGameView());
-        Scene gameScene = new Scene(root, 800, 600);
+        Scene gameScene = new Scene(root, 1050, 700);
         Stage gameStage = new Stage();
         gameStage.setScene(gameScene);
         gameStage.setTitle("HP Maze");
@@ -84,7 +85,15 @@ public class Main extends Application{
 		Stage safeStage = new Stage();
 		safeStage.setTitle("Retrieve Secret Code");
 		safeStage.setScene(safeScene);
-		safeStage.show();
-		
+		safeStage.show();	
+	}
+	
+	public static void launchSwipeScene(GameModel gameModel) {
+		SwipeScene swipe = new SwipeScene(gameModel);
+		Scene safeScene = new Scene(swipe.makeSwipeScene(), 800, 600);
+		Stage swipeStage = new Stage();
+		swipeStage.setTitle("Swipe away trees");
+		swipeStage.setScene(safeScene);
+		swipeStage.show();	
 	}
 }
