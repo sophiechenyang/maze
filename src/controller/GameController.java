@@ -150,7 +150,7 @@ public class GameController {
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 3 && !gameModel.isSnakeDefeated()) {
 				Main.launchSnakeScene(gameModel);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 4 && !gameModel.isWandRetrieved()) {
-				Main.launchWandScene(gameModel);
+				Main.launchWandScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 5 && !gameModel.isCodeRetrieved()) {
 				Main.launchSafeScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 6 && !gameModel.isClearedDementors()) {

@@ -11,18 +11,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.GameModel;
+import view.GameView;
 
 public class WandScene {
 	private GameModel gameModel;
+	private GameView gameView;
 	
-	public WandScene(GameModel gameModel) {
+	public WandScene(GameModel gameModel, GameView gameView) {
 		this.gameModel = gameModel;
+		this.gameView = gameView;
 	}
 	public Parent makeWandScene() {
 		Pane root = new Pane();
 		
 		Text text = new Text("Hover over harry and scroll to move it to the upper right corner");
-		Button closeButton = new Button("Return to Game");
+		Button closeButton = new Button("Put Wand in Inventory");
 		
     	Image wandImg = new Image("file:img/elder-wand.png");
     	ImageView wandView = new ImageView(wandImg);
@@ -58,6 +61,7 @@ public class WandScene {
             }
             
             private void closeWindow() {
+            	gameView.addWandToInventory();
 				Stage stage = (Stage) closeButton.getScene().getWindow();
 				stage.close();
 			}

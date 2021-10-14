@@ -229,6 +229,16 @@ public class GameView extends Parent{
 		ImageView bookView = new ImageView(book);
 		inventory.getChildren().add(bookView);
 	}
+	
+	public void addWandToInventory() {
+		
+		Image wand = new Image("file:img/wand.png");
+		
+		ImageView wandView = new ImageView(wand);
+		wandView.setFitWidth(40);
+		wandView.setPreserveRatio(true);
+		inventory.getChildren().add(wandView);
+	}
 
 
 }

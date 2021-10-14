@@ -76,8 +76,8 @@ public class Main extends Application{
 		
 	}
 	
-	public static void launchWandScene(GameModel gameModel) {
-		WandScene wand = new WandScene(gameModel);
+	public static void launchWandScene(GameModel gameModel, GameView gameView) {
+		WandScene wand = new WandScene(gameModel, gameView);
 		Scene wandScene = new Scene(wand.makeWandScene(), 800, 600);
 		Stage wandStage = new Stage();
 		wandStage.setTitle("Retrieve Elder Wand");

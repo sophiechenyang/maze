@@ -19,7 +19,7 @@ import view.GameView;
 public class RotateScene {
 	private GameModel gameModel;
 	private GameView gameView;
-	private Button closeButton = new Button("Equip the Book");
+	private Button closeButton = new Button("Put the Book in Inventory");
 	
 	public RotateScene(GameModel gameModel, GameView gameView) {
 		this.gameModel = gameModel;
