@@ -7,9 +7,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.GameModel;
 import setup.setUpApp;
+import view.GameView;
 import scene.WandScene;
 import scene.EndScene;
-import scene.SafeScene;
+import scene.RotateScene;
 import scene.SnakeScene;
 import scene.SwipeScene;
 import scene.VoldemortScene;
@@ -17,6 +18,7 @@ import controller.GameController;
 
 public class Main extends Application{
 	GameModel gameModel;
+	GameView gameView;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -84,8 +86,8 @@ public class Main extends Application{
 		
 	}
 	
-	public static void launchSafeScene(GameModel gameModel) {
-		SafeScene safe = new SafeScene(gameModel);
+	public static void launchSafeScene(GameModel gameModel, GameView gameView) {
+		RotateScene safe = new RotateScene(gameModel, gameView);
 		Scene safeScene = new Scene(safe.makeSafeScene(), 800, 410);
 		Stage safeStage = new Stage();
 		safeStage.setTitle("Retrieve Secret Code");

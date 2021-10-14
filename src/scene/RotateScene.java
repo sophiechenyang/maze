@@ -1,5 +1,6 @@
 package scene;
 
+import controller.GameController;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -13,13 +14,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.GameModel;
+import view.GameView;
 
-public class SafeScene {
+public class RotateScene {
 	private GameModel gameModel;
+	private GameView gameView;
 	private Button closeButton = new Button("Equip the Book");
 	
-	public SafeScene(GameModel gameModel) {
+	public RotateScene(GameModel gameModel, GameView gameView) {
 		this.gameModel = gameModel;
+		this.gameView = gameView;
 	}
 	
 	public Parent makeSafeScene() {
@@ -61,7 +65,6 @@ public class SafeScene {
 			}
         });
     	
-    	//root.getChildren().addAll(introView, sealView);
 		root.getChildren().addAll(instructView,introView,sealView);
 		return root;
 		
@@ -69,6 +72,7 @@ public class SafeScene {
 	
 	private void closeWindow() {
 		Stage stage = (Stage) closeButton.getScene().getWindow();
+		gameView.addBookToInventory();
 		stage.close();
 	}
 }

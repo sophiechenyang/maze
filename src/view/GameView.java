@@ -41,6 +41,7 @@ public class GameView extends Parent{
 	private int mana;
 	private Text healthCount = new Text("0");
 	private int health;
+	private VBox inventory = new VBox();
 	
 	Pane pane = new Pane();
 	private ArrayList<DementorView> dementorViewList = new ArrayList<DementorView>();
@@ -164,7 +165,12 @@ public class GameView extends Parent{
 		
 		charStats.getChildren().addAll(manaGroup, healthGroup);
 		
-		rightcontainer.getChildren().addAll(characterBox, charStats);
+		//VBox inventory = new VBox();
+		Text inventoryText = new Text("Inventory");
+		
+		inventory.getChildren().addAll(inventoryText);
+		
+		rightcontainer.getChildren().addAll(characterBox, charStats, inventory);
 		return rightcontainer;
 	}
 	
@@ -215,6 +221,13 @@ public class GameView extends Parent{
 	
 	public ArrayList<TileView> getTileViewList() {
 		return tileViewList;
+	}
+	
+	public void addBookToInventory() {
+		
+		Image book = new Image("file:img/book.png");
+		ImageView bookView = new ImageView(book);
+		inventory.getChildren().add(bookView);
 	}
 
 

@@ -152,7 +152,7 @@ public class GameController {
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 4 && !gameModel.isWandRetrieved()) {
 				Main.launchWandScene(gameModel);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 5 && !gameModel.isCodeRetrieved()) {
-				Main.launchSafeScene(gameModel);
+				Main.launchSafeScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 6 && !gameModel.isClearedDementors()) {
 				Main.launchSwipeScene(gameModel);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 7) {
@@ -237,5 +237,4 @@ public class GameController {
 		gameModel.reset();
 		startGame();
 	}
-
 }
