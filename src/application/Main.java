@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import model.GameModel;
 import setup.setUpApp;
 import scene.WandScene;
+import scene.EndScene;
 import scene.SafeScene;
 import scene.SnakeScene;
 import scene.SwipeScene;
@@ -35,6 +36,7 @@ public class Main extends Application{
         launchGame(true,2);
         //launchSwipeScene(gameModel);
         //launchVoldemortScene(gameModel);
+        //launchEndScene(gameModel);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
@@ -106,5 +108,14 @@ public class Main extends Application{
 		voldemortStage.setTitle("Defeat Voldemort");
 		voldemortStage.setScene(voldemortScene);
 		voldemortStage.show();	
+	}
+	
+	public static void launchEndScene(GameModel gameModel) {
+		EndScene end = new EndScene(gameModel);
+		Scene endScene = new Scene(end.makeEndScene(), 800, 450);
+		Stage endStage = new Stage();
+		endStage.setTitle("End Game");
+		endStage.setScene(endScene);
+		endStage.show();	
 	}
 }

@@ -10,11 +10,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.GameModel;
 
 public class VoldemortScene {
 	private GameModel gameModel;
-	VBox root = new VBox();
+	Pane root = new Pane();
+	private Button closeButton = new Button("Return to the Maze");
 	
 	public VoldemortScene(GameModel gameModel) {
 		this.gameModel = gameModel;
@@ -47,9 +49,13 @@ public class VoldemortScene {
     	Image defeat = new Image("file:img/defeat.png");
     	ImageView defeatView = new ImageView(defeat);
     	
+		closeButton.setLayoutX(350);
+		closeButton.setLayoutY(370);
+		closeButton.setOnMouseClicked(e -> closeWindow());
+    	
     	battleView.setOnMouseClicked(e -> {
     		battleView.setImage(null);
-    		root.getChildren().add(defeatView);
+    		root.getChildren().addAll(defeatView, closeButton);
     	});
     	
     	StackPane stackPane = new StackPane();
@@ -76,7 +82,12 @@ public class VoldemortScene {
     	
     	stackPane.getChildren().addAll(castingView, spell);
     	
-		root.getChildren().addAll(introView, introView2, stackPane);
+		root.getChildren().addAll(stackPane, introView2, introView);
+	}
+	
+	private void closeWindow() {
+		Stage stage = (Stage) closeButton.getScene().getWindow();
+		stage.close();
 	}
 
 }

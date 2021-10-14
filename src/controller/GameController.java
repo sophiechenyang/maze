@@ -143,48 +143,46 @@ public class GameController {
 			} else {
 				return;
 			}
-			
+		
 			if (playerModel.getX() == 13 && playerModel.getY() == 10) {
 				gameModel.setGameWon(true);
 				System.out.println("Game won:" + gameModel.isGameWon());
-			}
-			
-			if (maze[playerModel.getY()][playerModel.getX()] == 3 && !gameModel.isSnakeDefeated()) {
+			} else if (maze[playerModel.getY()][playerModel.getX()] == 3 && !gameModel.isSnakeDefeated()) {
 				Main.launchSnakeScene(gameModel);
-			} 
-			
-			if (maze[playerModel.getY()][playerModel.getX()] == 4 && !gameModel.isWandRetrieved()) {
+			} else if (maze[playerModel.getY()][playerModel.getX()] == 4 && !gameModel.isWandRetrieved()) {
 				Main.launchWandScene(gameModel);
-			}
-			
-			if (maze[playerModel.getY()][playerModel.getX()] == 5 && !gameModel.isCodeRetrieved()) {
+			} else if (maze[playerModel.getY()][playerModel.getX()] == 5 && !gameModel.isCodeRetrieved()) {
 				Main.launchSafeScene(gameModel);
-			}
-			
-			if (maze[playerModel.getY()][playerModel.getX()] == 6 && !gameModel.isClearedDementors()) {
+			} else if (maze[playerModel.getY()][playerModel.getX()] == 6 && !gameModel.isClearedDementors()) {
 				Main.launchSwipeScene(gameModel);
+			} else if (maze[playerModel.getY()][playerModel.getX()] == 7) {
+				Main.launchVoldemortScene(gameModel);
+			}  
+			
+			if (maze[playerModel.getY()][playerModel.getX()] == 8) {
+				Main.launchEndScene(gameModel);
 			}
 			
-			if (maze[playerModel.getY()][playerModel.getX()] == 7) {
-				Main.launchVoldemortScene(gameModel);
-			}
 			
 			
 			// TO DO: fix this to refer to the square that has the 3
 			if (gameModel.isSnakeDefeated()) {
-				
-				//TileView tile = tileViewList[2][3];
-				
-				System.out.println(gameModel.isSnakeDefeated());
-				tileViewList.forEach((tileView) -> {
-					
-					// 
-					
-					// get tileModel of the tile that has the 3 in the maze, and turn off it's tile view
-//					if (maze[playerModel.getY()][playerModel.getX()]==3) {
-//						tileView.setImage(null);
-//					}
-				});
+//				System.out.println(gameModel.isSnakeDefeated());
+//				tileViewList.forEach((tileView) -> {
+//					
+//					// 
+//					
+//					// get tileModel of the tile that has the 3 in the maze, and turn off it's tile view
+////					if (maze[playerModel.getY()][playerModel.getX()]==3) {
+////						tileView.setImage(null);
+////					}
+//				}
+//				
+//						
+//						);
+				TileModel snakeTile = new TileModel(3, 3, false);
+				TileView tileView = new TileView(snakeTile, 3);
+				//tileView.setImage(null);
 			}
 				
 				
