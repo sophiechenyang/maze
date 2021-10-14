@@ -37,6 +37,7 @@ public class Main extends Application{
         //launchSwipeScene(gameModel);
         //launchVoldemortScene(gameModel);
         //launchEndScene(gameModel);
+        //launchSafeScene(gameModel);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
@@ -85,7 +86,7 @@ public class Main extends Application{
 	
 	public static void launchSafeScene(GameModel gameModel) {
 		SafeScene safe = new SafeScene(gameModel);
-		Scene safeScene = new Scene(safe.makeSafeScene(), 800, 600);
+		Scene safeScene = new Scene(safe.makeSafeScene(), 800, 410);
 		Stage safeStage = new Stage();
 		safeStage.setTitle("Retrieve Secret Code");
 		safeStage.setScene(safeScene);

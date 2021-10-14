@@ -16,46 +16,59 @@ import model.GameModel;
 
 public class SafeScene {
 	private GameModel gameModel;
+	private Button closeButton = new Button("Equip the Book");
 	
 	public SafeScene(GameModel gameModel) {
 		this.gameModel = gameModel;
 	}
 	
 	public Parent makeSafeScene() {
-		VBox root = new VBox();
-		Button closeButton = new Button("Return to Game");
+		Pane root = new Pane();
 		
-		Text text = new Text("Hover over harry and scroll to move it to the upper right corner");
+    	Image sealImg = new Image("file:img/magic_seal.png");
+    	ImageView sealView = new ImageView(sealImg);
+    	sealView.setFitWidth(245);
+    	sealView.setPreserveRatio(true);
+    	sealView.setX(279.5);
+    	sealView.setY(102.5);
+		
+		Image introImg = new Image("file:img/rotate_intro.png");
+		ImageView introView = new ImageView(introImg);
+		introView.setOnMouseClicked(e -> introView.setImage(null));
+		
+		Image instructImg = new Image("file:img/rotate_instruct.png");
+		ImageView instructView = new ImageView(instructImg);
     	
-    	Image harryImg = new Image("file:img/safe.jpeg");
-    	ImageView safeView = new ImageView(harryImg);
-    	safeView.setFitWidth(500);
-
-    	safeView.setPreserveRatio(true);
+		Image unlockedImg = new Image("file:img/rotate_unlocked.png");
+		ImageView unlockedView = new ImageView(unlockedImg);
+		
+		closeButton.setLayoutX(350);
+		closeButton.setLayoutY(155);
+		closeButton.setOnMouseClicked(e -> closeWindow());
     	
-    	safeView.setOnRotate(new EventHandler<RotateEvent>() {
+    	
+    	sealView.setOnRotate(new EventHandler<RotateEvent>() {
 			@Override
 			public void handle(RotateEvent event) {
-				safeView.setRotate(safeView.getRotate() + event.getAngle());
+				sealView.setRotate(sealView.getRotate() + event.getAngle());
 				
-				if (safeView.getRotate()>90 && !gameModel.isCodeRetrieved()) {
+				if (sealView.getRotate()> 180 && !gameModel.isCodeRetrieved()) {
 					gameModel.setCodeRetrieved(true);
-					Text text = new Text("rotation success !");
-					
-					closeButton.setOnMouseClicked(e -> closeWindow());
-					root.getChildren().addAll(text, closeButton);
+					root.getChildren().clear();
+					root.getChildren().addAll(unlockedView, closeButton);
 				}
 				
 			}
-
-			private void closeWindow() {
-				Stage stage = (Stage) closeButton.getScene().getWindow();
-				stage.close();
-			}
         });
     	
-		root.getChildren().addAll(safeView, text);
+    	//root.getChildren().addAll(introView, sealView);
+		root.getChildren().addAll(instructView,introView,sealView);
 		return root;
 		
+	}
+	
+	private void closeWindow() {
+		Stage stage = (Stage) closeButton.getScene().getWindow();
+		stage.close();
 	}
 }
