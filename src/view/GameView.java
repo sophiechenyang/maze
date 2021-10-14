@@ -240,5 +240,10 @@ public class GameView extends Parent{
 		inventory.getChildren().add(wandView);
 	}
 
+	public void readyForVoldemort() {
+		
+		Text readyText = new Text("You are now ready to face Voldemort!");
+		inventory.getChildren().add(readyText);
+	}
 
 }

@@ -38,6 +38,7 @@ public class GameModel extends Parent {
 	private boolean wandRetrieved = false;
 	private boolean codeRetrieved = false;
 	private boolean clearedDementors = false;
+	private boolean showReady = false;
 	
 	public PlayerModel createPlayer(int playerType) {
 		if (playerType == 0) {
@@ -207,6 +208,16 @@ public class GameModel extends Parent {
 
 	public void setClearedDementors(boolean clearedDementors) {
 		this.clearedDementors = clearedDementors;
+	}
+
+
+	public boolean isShowReady() {
+		return showReady;
+	}
+
+
+	public void setShowReady(boolean showReady) {
+		this.showReady = showReady;
 	}
 
 }

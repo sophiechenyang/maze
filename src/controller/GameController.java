@@ -163,6 +163,11 @@ public class GameController {
 				Main.launchEndScene(gameModel);
 			}
 			
+			if (gameModel.isSnakeDefeated() && gameModel.isWandRetrieved() && gameModel.isCodeRetrieved() && !gameModel.isShowReady()) {
+				gameModel.setShowReady(true);
+				gameView.readyForVoldemort();
+			}
+			
 			
 			
 			// TO DO: fix this to refer to the square that has the 3
