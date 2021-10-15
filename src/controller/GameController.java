@@ -43,10 +43,8 @@ public class GameController {
 	public void startGame() {
 		timer = new Timer();
 		
-		//timer.schedule(new CheckWin(), 0, 100);
+		timer.schedule(new CheckWin(), 0, 100);
 		gameModel.setGameActive(true);
-		
-		//createPlayer(gameModel.getPlayerType());
 		
 		playerModel = gameModel.createPlayer(gameModel.getPlayerType());
 
@@ -85,7 +83,23 @@ public class GameController {
 		public void run() {
 			Platform.runLater(() -> {
 				
-				System.out.println("player location is X:" + playerModel.getX() + "Y: " + playerModel.getY());
+//				for (int i =0; i< dementorList.size(); i++) {
+//					DementorModel dementor = dementorList.get(i);
+//					System.out.println("dementorX :" + dementor.getX());
+//					System.out.println("dementorY :" + dementor.getY());
+//					System.out.println("playerX :" + playerModel.getX());
+//					System.out.println("playerY :" + playerModel.getY());
+//					if (dementor.getX() == playerModel.getX() && dementor.getY() == playerModel.getY()) {
+//						System.out.println("dementor detected");
+//						if (!gameModel.isHPdeducted()) {
+//							playerModel.reduceHealth(5);
+//							gameView.updatePlayerStats(playerModel);
+//							gameModel.setHPdeducted(true);
+//						}	
+//					} else {
+//						gameModel.setHPdeducted(false);
+//					}
+//				}
 				
 			});
 		}
@@ -98,7 +112,7 @@ public class GameController {
 
 	public void createDementor() {
 		DementorModel dementorModel = gameModel.createDementor();
-		DementorView dementorView = gameView.createDementor(dementorModel, gameModel);
+		DementorView dementorView = gameView.createDementor(dementorModel, this);
 		DementorController dementorController = new DementorController(dementorModel, dementorView, gameModel, gameView, this, playerModel);
 	}
 
@@ -192,15 +206,19 @@ public class GameController {
 				
 				
 			//decrease health when running into dementor
-			for (int i =0; i< dementorList.size(); i++) {
-				DementorModel dementor = dementorList.get(i);
-				if (dementor.getX() == playerModel.getX() && dementor.getY() == playerModel.getY()) {
-					System.out.println("caught by dementor");
-					playerModel.reduceHealth(5);
-					gameView.updatePlayerStats(playerModel);
-				}
-			}
+			checkDementorCollision();
 			
+		}
+	}
+	
+	public void checkDementorCollision() {
+		for (int i =0; i< dementorList.size(); i++) {
+			DementorModel dementor = dementorList.get(i);
+			if (dementor.getX() == playerModel.getX() && dementor.getY() == playerModel.getY()) {
+				System.out.println("caught by dementor");
+				playerModel.reduceHealth(5);
+				gameView.updatePlayerStats(playerModel);
+			}
 		}
 	}
 

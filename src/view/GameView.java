@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
+import controller.GameController;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -86,8 +87,8 @@ public class GameView extends Parent{
 		return playerView;
 	}
 	
-	public DementorView createDementor(DementorModel dementorModel, GameModel gameModel) {
-		DementorView dementorView = new DementorView(dementorModel);
+	public DementorView createDementor(DementorModel dementorModel, GameController gameController) {
+		DementorView dementorView = new DementorView(dementorModel, gameController);
 		pane.getChildren().add(dementorView);
 		dementorViewList.add(dementorView);
 		return dementorView;
@@ -243,7 +244,7 @@ public class GameView extends Parent{
 	public void readyForVoldemort() {
 		
 		Text readyText = new Text("You are now ready to face Voldemort!");
-		inventory.getChildren().add(readyText);
+		//inventory.getChildren().add(readyText);
 	}
 
 }

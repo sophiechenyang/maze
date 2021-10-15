@@ -32,6 +32,7 @@ public class GameModel extends Parent {
 	private ArrayList<DementorModel> dementorList = new ArrayList<DementorModel>(); 
 	private int playerType = 0;
 	private boolean isAdvanced = false; 
+	private boolean isHPdeducted = false;
 	
 	// microgames
 	private boolean snakeDefeated = false;
@@ -160,6 +161,7 @@ public class GameModel extends Parent {
 
 	public void setSnakeDefeated(boolean snakeDefeated) {
 		this.snakeDefeated = snakeDefeated;
+		
 	}
 
 	public boolean isWandRetrieved() {
@@ -218,6 +220,16 @@ public class GameModel extends Parent {
 
 	public void setShowReady(boolean showReady) {
 		this.showReady = showReady;
+	}
+
+
+	public boolean isHPdeducted() {
+		return isHPdeducted;
+	}
+
+
+	public void setHPdeducted(boolean isHPdeducted) {
+		this.isHPdeducted = isHPdeducted;
 	}
 
 }

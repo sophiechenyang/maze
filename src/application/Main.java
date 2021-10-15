@@ -40,6 +40,7 @@ public class Main extends Application{
         //launchVoldemortScene(gameModel);
         //launchEndScene(gameModel);
         //launchSafeScene(gameModel);
+        //launchSnakeScene(gameModel);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
