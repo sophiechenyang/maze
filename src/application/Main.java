@@ -41,6 +41,7 @@ public class Main extends Application{
         //launchEndScene(gameModel);
         //launchSafeScene(gameModel);
         //launchSnakeScene(gameModel);
+        //launchWandScene(gameModel, gameView);
         
         // stop application on window close
         primaryStage.setOnCloseRequest(e -> {
@@ -78,7 +79,7 @@ public class Main extends Application{
 	
 	public static void launchWandScene(GameModel gameModel, GameView gameView) {
 		WandScene wand = new WandScene(gameModel, gameView);
-		Scene wandScene = new Scene(wand.makeWandScene(), 800, 600);
+		Scene wandScene = new Scene(wand.makeWandScene(), 698, 480);
 		Stage wandStage = new Stage();
 		wandStage.setTitle("Retrieve Elder Wand");
 		wandStage.setScene(wandScene);
