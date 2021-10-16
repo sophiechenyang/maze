@@ -215,7 +215,6 @@ public class GameController {
 		for (int i =0; i< dementorList.size(); i++) {
 			DementorModel dementor = dementorList.get(i);
 			if (dementor.getX() == playerModel.getX() && dementor.getY() == playerModel.getY()) {
-				System.out.println("caught by dementor");
 				playerModel.reduceHealth(5);
 				gameView.updatePlayerStats(playerModel);
 			}

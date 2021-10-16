@@ -64,12 +64,11 @@ public class Main extends Application{
         gameStage.setScene(gameScene);
         gameStage.setTitle("HP Maze");
         gameStage.show();
-        
 	}
 	
 	public static void launchSnakeScene(GameModel gameModel) {
 		SnakeScene snakeView = new SnakeScene(gameModel);
-		Scene snakeScene = new Scene(snakeView.makeSnakeScene(), 800, 600);
+		Scene snakeScene = new Scene(snakeView.makeSnakeScene(), 850, 480);
 		Stage snakeStage = new Stage();
 		snakeStage.setTitle("Fight Snake");
 		snakeStage.setScene(snakeScene);

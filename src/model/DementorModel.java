@@ -22,12 +22,10 @@ public class DementorModel extends GameModel{
 	
 	public void setX(int x) {
 		this.x = x;
-		System.out.println("x:"+this.x+" y:"+this.y);
 	}
 
 	public void setY(int y) {
 		this.y = y;
-		System.out.println("x:"+this.x+" y:"+this.y);
 	}
 	
 	public boolean isDead() {
