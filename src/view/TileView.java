@@ -13,7 +13,7 @@ import model.TileModel;
 public class TileView extends ImageView {
 	private int tileSize = GameModel.getTileSize();
 	private Image tileImage = new Image("file:img/tile.png");
-	private Image grassTile = new Image("file:img/grass_tile.png");
+	private Image grassTile = new Image("file:img/tile.png");
 	private Image wandImage = new Image("file:img/wand.png");
 	private Image snakeImage = new Image("file:img/snake.png");
 	private Image rotateImage = new Image("file:img/book.png");

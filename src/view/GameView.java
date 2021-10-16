@@ -43,6 +43,8 @@ public class GameView extends Parent{
 	private Text healthCount = new Text("0");
 	private int health;
 	private VBox inventory = new VBox();
+	private Image playerImg = new Image("file:img/harry.png");
+	private ImageView playerImgView = new ImageView(playerImg);
 	
 	Pane pane = new Pane();
 	private ArrayList<DementorView> dementorViewList = new ArrayList<DementorView>();
@@ -50,11 +52,11 @@ public class GameView extends Parent{
 	
 	public GameView() {
 		BorderPane root = new BorderPane();
-		root.setStyle("-fx-background-color: green;");
+		root.setStyle("-fx-background-color: #003714;");
 		root.setPrefWidth(sidePaneWidth *2 + columns * tileSize);
 		root.setPrefHeight(900);
 		pane.setPrefSize(600, 200);
-		pane.setStyle("-fx-background-color: #324530;");
+		pane.setStyle("-fx-background-color: #28482D;");
 
 		root.setTop(createHeader());
 		root.setCenter(pane);
@@ -77,6 +79,10 @@ public class GameView extends Parent{
 		house = player.getHouse();
 		mana = player.getMana();
 		health = player.getHealth();
+		
+		String url = player.getPlayerURL();
+		Image playerImg = new Image(url);
+		playerImgView.setImage(playerImg);
 		
 		playerName.setText(name);
 		playerHouse.setText(house);
@@ -110,13 +116,14 @@ public class GameView extends Parent{
 	}
 	// Game Title
 	public Pane createHeader() {
-		Pane header = new Pane();
-		header.setStyle("-fx-background-color: green;");
+		HBox header = new HBox();
+		header.setMinHeight(120);
+		header.setAlignment(Pos.CENTER);
 		
 		Image topPaneImg = new Image("file:img/title.png");
 		ImageView topPaneView = new ImageView(topPaneImg);
-		topPaneView.setFitWidth(750);
-		topPaneView.setFitHeight(100);
+		topPaneView.setFitHeight(65);
+		topPaneView.setPreserveRatio(true);
 		
 		//header.getStyleClass().add("header");
 		
@@ -127,40 +134,63 @@ public class GameView extends Parent{
 	
 	public Pane createLeftPanel() {
 		Pane leftcontainer = new Pane();
-		leftcontainer.setStyle("-fx-background-color: green;");
 		leftcontainer.setPrefWidth(sidePaneWidth);
 				
-		Image leftPaneImg = new Image("file:img/leftPane.png");
+		Image leftPaneImg = new Image("file:img/death_eaters.png");
 		ImageView leftPaneView = new ImageView(leftPaneImg);
 		
-		leftPaneView.setFitWidth(100);
-		leftPaneView.setFitHeight(500);
+		leftPaneView.setFitWidth(110);
+		leftPaneView.setFitHeight(440);
+		leftPaneView.setPreserveRatio(true);
+		leftPaneView.setY(200);
+		leftPaneView.setX(20);
 		
-		//leftcontainer.getChildren().addAll(leftPaneView);
+		leftcontainer.getChildren().addAll(leftPaneView);
 		return leftcontainer;
 	}
 	
 
 	public VBox createRightPanel() {
 		VBox rightcontainer = new VBox();
-		rightcontainer.setStyle("-fx-background-color: yellow;");
+		
+		Image rightPaneImg = new Image("file:img/death_eaters.png");
+		ImageView rightPaneView = new ImageView(rightPaneImg);
+		
+		rightPaneView.setFitWidth(110);
+		rightPaneView.setFitHeight(440);
+		rightPaneView.setPreserveRatio(true);
+		rightPaneView.setX(20);
+		
+		//rightcontainer.setStyle("-fx-background-color: yellow;");
 		rightcontainer.setPrefWidth(sidePaneWidth);
 		rightcontainer.setPadding(new Insets(15, 12, 15, 12));
 		rightcontainer.setSpacing(10);
+		
+		playerImgView.setFitWidth(96);
+		playerImgView.setPreserveRatio(true);
 		
 		VBox characterBox = new VBox();
 		//Text charName = new Text("Name:");
 		
 		HBox houseGroup = new HBox();
 		Text houseText = new Text("House: ");
+		houseText.setFill(Color.GOLDENROD);
+		playerHouse.setFill(Color.GOLDENROD);
+		playerName.setFill(Color.GOLD);
 		houseGroup.getChildren().addAll(houseText, playerHouse);
-		characterBox.getChildren().addAll(playerName, houseGroup);
+		characterBox.getChildren().addAll(playerImgView, playerName, houseGroup);
 		
 		VBox charStats = new VBox();
 		HBox manaGroup = new HBox();
 		Text manaText = new Text("mana: ");
+		manaText.setFill(Color.LIGHTBLUE);
+		manaCount.setFill(Color.LIGHTBLUE);
+		
 		HBox healthGroup = new HBox();
 		Text healthText = new Text("health: ");
+		healthText.setFill(Color.LIGHTGREEN);
+		healthCount.setFill(Color.LIGHTGREEN);
+		
 		healthGroup.getChildren().addAll(healthText, healthCount);
 		manaGroup.getChildren().addAll(manaText, manaCount);
 		
@@ -168,17 +198,18 @@ public class GameView extends Parent{
 		
 		//VBox inventory = new VBox();
 		Text inventoryText = new Text("Inventory");
+		inventoryText.setFill(Color.GHOSTWHITE);
 		
 		inventory.getChildren().addAll(inventoryText);
 		
-		rightcontainer.getChildren().addAll(characterBox, charStats, inventory);
+		rightcontainer.getChildren().addAll(characterBox, charStats, inventory, rightPaneView);
 		return rightcontainer;
 	}
 	
 	public Pane createBottomPane() {
 		HBox bottomcontainer = new HBox();
 		bottomcontainer.setPrefHeight(200);
-		bottomcontainer.setStyle("-fx-background-color: green;");
+		//bottomcontainer.setStyle("-fx-background-color: green;");
 		Image bottomPaneImg = new Image("file:img/bottomPane.png");
 		ImageView bottomPaneView = new ImageView(bottomPaneImg);
 		bottomPaneView.setFitWidth(1160);
