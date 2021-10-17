@@ -23,6 +23,7 @@ public class TileView extends ImageView {
 	private int tileType;
 
 	public TileView(TileModel tileModel, int tileType) {
+		this.tileType = tileType;
 
 		if (tileType == 1) {
 			this.setImage(grassTile);
@@ -70,6 +71,10 @@ public class TileView extends ImageView {
 		setTranslateX(tileModel.getX() * tileSize);
 		setTranslateY(tileModel.getY() * tileSize);
 
+	}
+	
+	public int getTileType() {
+		return tileType;
 	}
 
 	public void setPlayerHandler(EventHandler<MouseEvent> listenForClick) {

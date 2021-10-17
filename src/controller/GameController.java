@@ -26,11 +26,10 @@ public class GameController {
 	private GameModel gameModel = new GameModel();
 	private PlayerModel playerModel;
 	private PlayerView playerView;
-	private int[][] maze = gameModel.getMaze();
+	private int[][] maze = GameModel.getMaze();
 	Timer timer;
-	private int tileSize = gameModel.getTileSize();
+	private int tileSize = GameModel.getTileSize();
 	private ArrayList<DementorModel> dementorList = gameModel.getDementorList();
-	private ArrayList<TileView> tileViewList = gameView.getTileViewList();
 	
 	public GameController(boolean difficulty, int playerType) {
 		gameView.setKeyPressHandler(new events());
@@ -82,24 +81,6 @@ public class GameController {
 
 		public void run() {
 			Platform.runLater(() -> {
-				
-//				for (int i =0; i< dementorList.size(); i++) {
-//					DementorModel dementor = dementorList.get(i);
-//					System.out.println("dementorX :" + dementor.getX());
-//					System.out.println("dementorY :" + dementor.getY());
-//					System.out.println("playerX :" + playerModel.getX());
-//					System.out.println("playerY :" + playerModel.getY());
-//					if (dementor.getX() == playerModel.getX() && dementor.getY() == playerModel.getY()) {
-//						System.out.println("dementor detected");
-//						if (!gameModel.isHPdeducted()) {
-//							playerModel.reduceHealth(5);
-//							gameView.updatePlayerStats(playerModel);
-//							gameModel.setHPdeducted(true);
-//						}	
-//					} else {
-//						gameModel.setHPdeducted(false);
-//					}
-//				}
 				
 			});
 		}
@@ -182,26 +163,22 @@ public class GameController {
 				gameView.readyForVoldemort();
 			}
 			
-			
-			
-			// TO DO: fix this to refer to the square that has the 3
+			// hide snake after it has been defeated
 			if (gameModel.isSnakeDefeated()) {
-//				System.out.println(gameModel.isSnakeDefeated());
-//				tileViewList.forEach((tileView) -> {
-//					
-//					// 
-//					
-//					// get tileModel of the tile that has the 3 in the maze, and turn off it's tile view
-////					if (maze[playerModel.getY()][playerModel.getX()]==3) {
-////						tileView.setImage(null);
-////					}
-//				}
-//				
-//						
-//						);
-				TileModel snakeTile = new TileModel(3, 3, false);
-				TileView tileView = new TileView(snakeTile, 3);
-				//tileView.setImage(null);
+				TileView tileView = gameView.getTileOfType(3);
+				tileView.setImage(null);
+			}
+			
+			// hide wand after it has been defeated
+			if (gameModel.isWandRetrieved()) {
+				TileView tileView = gameView.getTileOfType(4);
+				tileView.setImage(null);
+			}
+			
+			// hide book after it has been defeated
+			if (gameModel.isCodeRetrieved()) {
+				TileView tileView = gameView.getTileOfType(5);
+				tileView.setImage(null);
 			}
 				
 				
@@ -210,6 +187,7 @@ public class GameController {
 			
 		}
 	}
+
 	
 	public void checkDementorCollision() {
 		for (int i =0; i< dementorList.size(); i++) {

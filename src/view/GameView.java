@@ -73,6 +73,16 @@ public class GameView extends Parent{
 		return tileView;	
 	}
 	
+	public TileView getTileOfType(int tileType) {
+		for(int i=0; i<tileViewList.size(); i++) {
+			TileView tileView = tileViewList.get(i);
+			if (tileView.getTileType()==tileType) {
+				return tileView;
+			}
+		}
+		return null;
+	}
+	
 	public PlayerView createPlayer(PlayerModel player) {
 		PlayerView playerView = new PlayerView(player);
 		name = player.getPlayerName();
@@ -229,7 +239,6 @@ public class GameView extends Parent{
 	
 	public void setLostView() {
 		Image lostImg = new Image("file:img/harry.png");
-		
 		dementorViewList.forEach(dementor -> dementor.stopDementor());
 	}
 	
@@ -249,10 +258,6 @@ public class GameView extends Parent{
 	
 	public void setKeyReleaseHandler(EventHandler<KeyEvent> deactivateAmulet) {
 		this.setOnKeyReleased(deactivateAmulet);
-	}
-	
-	public ArrayList<TileView> getTileViewList() {
-		return tileViewList;
 	}
 	
 	public void addBookToInventory() {

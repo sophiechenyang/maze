@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import controller.GameController;
@@ -115,7 +116,7 @@ public class GameModel extends Parent {
 	}
 	
 	public int generateRand() {
-		int random = 2 + (int) (Math.random() * ((7 - 2) + 1));
+		int random = 2 + (int) (Math.random() * ((9 - 2) + 1));
 		return random;
 	}
 
