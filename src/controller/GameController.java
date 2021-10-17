@@ -150,7 +150,7 @@ public class GameController {
 				Main.launchSafeScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 6 && !gameModel.isClearedDementors()) {
 				Main.launchSwipeScene(gameModel);
-			} else if (maze[playerModel.getY()][playerModel.getX()] == 7) {
+			} else if (maze[playerModel.getY()][playerModel.getX()] == 7 && !gameModel.isVoldemortDefeated()) {
 				Main.launchVoldemortScene(gameModel);
 			}  
 			

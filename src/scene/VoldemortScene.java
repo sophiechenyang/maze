@@ -55,6 +55,7 @@ public class VoldemortScene {
     	
     	battleView.setOnMouseClicked(e -> {
     		battleView.setImage(null);
+    		gameModel.setVoldemortDefeated(true);
     		root.getChildren().addAll(defeatView, closeButton);
     	});
     	
@@ -68,7 +69,6 @@ public class VoldemortScene {
     			if (value.equalsIgnoreCase(correctSpell)) {
     				root.getChildren().clear();
     				root.getChildren().add(battleView);
-    				System.out.println("yay");
     			}
     		}
     		

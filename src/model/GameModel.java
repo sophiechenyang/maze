@@ -41,6 +41,7 @@ public class GameModel extends Parent {
 	private boolean codeRetrieved = false;
 	private boolean clearedDementors = false;
 	private boolean showReady = false;
+	private boolean voldemortDefeated = false; 
 	
 	public PlayerModel createPlayer(int playerType) {
 		if (playerType == 0) {
@@ -231,6 +232,16 @@ public class GameModel extends Parent {
 
 	public void setHPdeducted(boolean isHPdeducted) {
 		this.isHPdeducted = isHPdeducted;
+	}
+
+
+	public boolean isVoldemortDefeated() {
+		return voldemortDefeated;
+	}
+
+
+	public void setVoldemortDefeated(boolean voldemortDefeated) {
+		this.voldemortDefeated = voldemortDefeated;
 	}
 
 }
