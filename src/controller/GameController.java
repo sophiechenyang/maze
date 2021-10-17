@@ -72,7 +72,7 @@ public class GameController {
 					createDementor();
 				}  
 				
-				if (dementorCount > 2){
+				if (dementorCount > 0){
 					setGameOver();
 				}
 			});

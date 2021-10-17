@@ -20,36 +20,20 @@ public class Main extends Application{
 	GameModel gameModel;
 	GameView gameView;
 	static Stage primaryStage = new Stage();
+	static String CSS;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-	    Pane root = new Pane();
-        setUpApp app = new setUpApp();
-        app.setLayoutX(120);
-        app.setPadding(new Insets(100,100,100,100));
-        root.getChildren().add(app);
-        
-        Scene scene = new Scene(root, 1080, 1080);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("HP Maze");
-        //primaryStage.show();
-        
-        launchGame(true,2);
+		CSS = getClass().getResource("style.css").toExternalForm();
+	    startGame();
+	    
+        //launchGame(true,2);
         //launchSwipeScene(gameModel);
         //launchVoldemortScene(gameModel);
         //launchEndScene(gameModel);
         //launchSafeScene(gameModel);
         //launchSnakeScene(gameModel);
         //launchWandScene(gameModel, gameView);
-        
-        // stop application on window close
-        primaryStage.setOnCloseRequest(e -> {
-            Platform.exit();
-            System.exit(0);
-        });
-	
 	}
 
 	public static void main(String[] args) {
@@ -80,6 +64,27 @@ public class Main extends Application{
 		snakeStage.setScene(snakeScene);
 		snakeStage.show();
 		
+	}
+	
+	public static void startGame() {
+		Pane root = new Pane();
+        setUpApp app = new setUpApp();
+        app.setLayoutX(120);
+        app.setPadding(new Insets(100,100,100,100));
+        root.getChildren().add(app);
+        
+        Scene scene = new Scene(root, 1080, 1080);
+        scene.getStylesheets().add(CSS);
+        
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("HP Maze");
+        primaryStage.show();
+        
+        // stop application on window close
+        primaryStage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
 	}
 	
 	public static void launchWandScene(GameModel gameModel, GameView gameView) {

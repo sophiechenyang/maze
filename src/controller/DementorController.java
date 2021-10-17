@@ -61,15 +61,11 @@ public class DementorController {
 			} else {
 				dementorView.setCursor(Cursor.HAND);
 			}
-				
-				//dementorView.stopBeetle();
-			//System.out.println(e);
 			
 		}
 	}
 	
 	private void killDementor() {
-		//beetleView.setImage(null);
 		
 		if (gameModel.isGameActive()) {
 			dementorView.fadeDementor(this.dementorView);

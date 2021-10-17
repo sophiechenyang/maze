@@ -251,8 +251,9 @@ public class GameView extends Parent{
 		lostBttn.setLayoutY(280);
 		
 		lostBttn.setOnMouseClicked(e -> {
-			//Main.start(new Stage());
-			Platform.exit();
+			Main.startGame();
+			Stage stage = (Stage) lostBttn.getScene().getWindow();
+			stage.close();
 			//Main.launchGame(true,2);
 		});
 		pane.getChildren().addAll(lostView, lostBttn);
