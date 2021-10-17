@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 
 import controller.GameController;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,11 +22,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.DementorModel;
 import model.GameModel;
 import model.PlayerModel;
 import model.TileModel;
 import model.ManaModel;
+import application.Main;
 
 public class GameView extends Parent{	
 	
@@ -238,7 +241,21 @@ public class GameView extends Parent{
 	}
 	
 	public void setLostView() {
-		Image lostImg = new Image("file:img/harry.png");
+		Image lostImg = new Image("file:img/game_over.png");
+		ImageView lostView = new ImageView(lostImg);
+		lostView.setX(240);
+		lostView.setY(150);
+		
+		Button lostBttn = new Button("New Game");
+		lostBttn.setLayoutX(350);
+		lostBttn.setLayoutY(280);
+		
+		lostBttn.setOnMouseClicked(e -> {
+			//Main.start(new Stage());
+			Platform.exit();
+			//Main.launchGame(true,2);
+		});
+		pane.getChildren().addAll(lostView, lostBttn);
 		dementorViewList.forEach(dementor -> dementor.stopDementor());
 	}
 	

@@ -70,7 +70,9 @@ public class GameController {
 
 				if (dementorCount < 20) {
 					createDementor();
-				} else {
+				}  
+				
+				if (dementorCount > 2){
 					setGameOver();
 				}
 			});
@@ -208,7 +210,7 @@ public class GameController {
 		this.gameView = gameView;
 	}
 
-	public void updateBeetleScore() {
+	public void updateDementorScore() {
 		gameModel.increaseGamePointsBy(5);
 		gameView.updateScore(gameModel);
 	}

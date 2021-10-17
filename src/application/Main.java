@@ -19,6 +19,7 @@ import controller.GameController;
 public class Main extends Application{
 	GameModel gameModel;
 	GameView gameView;
+	static Stage primaryStage = new Stage();
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -54,6 +55,10 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 
+	}
+	
+	public void newGame() throws Exception {
+		start(primaryStage);
 	}
 	
 	public static void launchGame(boolean difficulty, int playerType) {
