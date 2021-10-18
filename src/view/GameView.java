@@ -186,7 +186,6 @@ public class GameView extends Parent{
 		rightPaneView.setPreserveRatio(true);
 		rightPaneView.setX(20);
 		
-		//rightcontainer.setStyle("-fx-background-color: yellow;");
 		rightcontainer.setPrefWidth(sidePaneWidth);
 		rightcontainer.setPadding(new Insets(15, 12, 15, 12));
 		rightcontainer.setSpacing(10);
@@ -195,7 +194,6 @@ public class GameView extends Parent{
 		playerImgView.setPreserveRatio(true);
 		
 		VBox characterBox = new VBox();
-		//Text charName = new Text("Name:");
 		
 		HBox houseGroup = new HBox();
 		Text houseText = new Text("House: ");
@@ -221,7 +219,6 @@ public class GameView extends Parent{
 		
 		charStats.getChildren().addAll(manaGroup, healthGroup);
 		
-		//VBox inventory = new VBox();
 		Text inventoryText = new Text("Inventory");
 		inventoryText.setFill(Color.GHOSTWHITE);
 		
@@ -308,8 +305,9 @@ public class GameView extends Parent{
 
 	public void readyForVoldemort() {
 		
-		Text readyText = new Text("You are now ready to face Voldemort!");
-		//inventory.getChildren().add(readyText);
+		Text readyText = new Text("Ready for Voldemort");
+		readyText.setFill(Color.FLORALWHITE);
+		inventory.getChildren().add(readyText);
 	}
 
 }
