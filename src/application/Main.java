@@ -9,7 +9,7 @@ import model.GameModel;
 import setup.setUpApp;
 import view.GameView;
 import scene.WandScene;
-import scene.EndScene;
+import scene.ReadyScene;
 import scene.RotateScene;
 import scene.SnakeScene;
 import scene.SwipeScene;
@@ -25,15 +25,16 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		CSS = getClass().getResource("style.css").toExternalForm();
-	    startSelection();
+	    //startSelection();
 	    
-        //launchGame(true,2);
+        launchGame(true,2);
         //launchSwipeScene(gameModel);
         //launchVoldemortScene(gameModel);
         //launchEndScene(gameModel);
         //launchSafeScene(gameModel);
         //launchSnakeScene(gameModel);
         //launchWandScene(gameModel, gameView);
+        //launchReadyScene(gameModel,gameView);
 	}
 
 	public static void main(String[] args) {
@@ -66,7 +67,7 @@ public class Main extends Application{
 		Pane root = new Pane();
         GameController controller = new GameController(difficulty, playerType);
         root.getChildren().add(controller.getGameView());
-        Scene gameScene = new Scene(root, 1050, 700);
+        Scene gameScene = new Scene(root, 1050, 670);
         Stage gameStage = new Stage();
         gameStage.setScene(gameScene);
         gameStage.setTitle("HP Maze");
@@ -116,6 +117,15 @@ public class Main extends Application{
 		swipeStage.show();	
 	}
 	
+	public static void launchReadyScene(GameModel gameModel, GameView gameView) {
+		ReadyScene ready = new ReadyScene(gameModel);
+		Scene readyScene = new Scene(ready.makeReadyScene(), 800, 450);
+		Stage readyStage = new Stage();
+		readyStage.setTitle("Not ready for Voldemort");
+		readyStage.setScene(readyScene);
+		readyStage.show();	
+	}
+	
 	public static void launchVoldemortScene(GameModel gameModel, GameView gameView) {
 		VoldemortScene voldemort = new VoldemortScene(gameModel, gameView);
 		Scene voldemortScene = new Scene(voldemort.makeVoldemortScene(), 800, 450);
@@ -123,14 +133,5 @@ public class Main extends Application{
 		voldemortStage.setTitle("Defeat Voldemort");
 		voldemortStage.setScene(voldemortScene);
 		voldemortStage.show();	
-	}
-	
-	public static void launchEndScene(GameModel gameModel) {
-		EndScene end = new EndScene(gameModel);
-		Scene endScene = new Scene(end.makeEndScene(), 800, 450);
-		Stage endStage = new Stage();
-		endStage.setTitle("End Game");
-		endStage.setScene(endScene);
-		endStage.show();	
 	}
 }

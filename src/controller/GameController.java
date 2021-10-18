@@ -154,8 +154,6 @@ public class GameController {
 				playerModel.setY(currentPlayerY + 1);
 				playerView.moveY(playerModel.getY() * tileSize);
 
-			} else {
-				return;
 			}
 		
 			if (maze[playerModel.getY()][playerModel.getX()] == 3 && !gameModel.isSnakeDefeated()) {
@@ -168,9 +166,13 @@ public class GameController {
 				Main.launchSwipeScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 7 && !gameModel.isVoldemortDefeated()) {
 				Main.launchVoldemortScene(gameModel, gameView);
-			} else if (maze[playerModel.getY()][playerModel.getX()] == 8) {
-				gameModel.setGameWon(true);
-				Main.launchEndScene(gameModel);
+			} else if (maze[playerModel.getY()][playerModel.getX()] == 8 && gameModel.isVoldemortDefeated()) {
+				setGameWon();
+				//Main.launchEndScene(gameModel);
+			}
+			
+			if (maze[playerModel.getY()][playerModel.getX()] == 9 && !gameModel.isSnakeDefeated() || !gameModel.isWandRetrieved() || !gameModel.isCodeRetrieved()) {
+				System.out.println("not ready");
 			}
 			
 			if (gameModel.isSnakeDefeated() && gameModel.isWandRetrieved() && gameModel.isCodeRetrieved() && !gameModel.isShowReady()) {
@@ -184,13 +186,13 @@ public class GameController {
 				tileView.setImage(null);
 			}
 			
-			// hide wand after it has been defeated
+			// hide wand after it has been retrieved
 			if (gameModel.isWandRetrieved()) {
 				TileView tileView = gameView.getTileOfType(4);
 				tileView.setImage(null);
 			}
 			
-			// hide book after it has been defeated
+			// hide book after code has been retrieved
 			if (gameModel.isCodeRetrieved()) {
 				TileView tileView = gameView.getTileOfType(5);
 				tileView.setImage(null);

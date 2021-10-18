@@ -45,6 +45,7 @@ public class GameView extends Parent{
 	private VBox inventory = new VBox();
 	private Image playerImg = new Image("file:img/harry.png");
 	private ImageView playerImgView = new ImageView(playerImg);
+	private Button resetBttn = new Button("New Game");
 	
 	Pane pane = new Pane();
 	private ArrayList<DementorView> dementorViewList = new ArrayList<DementorView>();
@@ -54,14 +55,17 @@ public class GameView extends Parent{
 		BorderPane root = new BorderPane();
 		root.setStyle("-fx-background-color: #003714;");
 		root.setPrefWidth(sidePaneWidth *2 + columns * tileSize);
-		root.setPrefHeight(900);
-		pane.setPrefSize(600, 200);
+		root.setPrefHeight(400);
+		//pane.setMaxHeight(500);
+		pane.setMaxWidth(750);
+		pane.setPrefHeight(500);
 		pane.setStyle("-fx-background-color: #28482D;");
 
 		root.setTop(createHeader());
 		root.setCenter(pane);
 		root.setRight(createRightPanel());
 		root.setLeft(createLeftPanel());
+		//root.setBottom(createBottomPane());
 		
 		this.getChildren().add(root);
 	}
@@ -231,7 +235,7 @@ public class GameView extends Parent{
 	public Pane createBottomPane() {
 		HBox bottomcontainer = new HBox();
 		bottomcontainer.setPrefHeight(200);
-		//bottomcontainer.setStyle("-fx-background-color: green;");
+		bottomcontainer.setStyle("-fx-background-color: yellow;");
 		Image bottomPaneImg = new Image("file:img/bottomPane.png");
 		ImageView bottomPaneView = new ImageView(bottomPaneImg);
 		bottomPaneView.setFitWidth(1160);
@@ -242,29 +246,40 @@ public class GameView extends Parent{
 	}
 	
 	public void setWinView() {
-		Image winImg = new Image("file:img/harry.png");
+		Image winImg = new Image("file:img/successImg.png");
 		ImageView winView = new ImageView(winImg);
-		// Button playAgain = new Button("Play Again");
-		pane.getChildren().clear();
-		pane.getChildren().addAll(winView);
+		winView.setX(80);
+		winView.setY(110);
+		
+		resetBttn.setLayoutX(350);
+		resetBttn.setLayoutY(340);
+		
+		resetBttn.setOnMouseClicked(e -> {
+			Main.startSelection();
+			Stage stage = (Stage) resetBttn.getScene().getWindow();
+			stage.close();
+		});
+		
+		//pane.getChildren().clear();
+		pane.getChildren().addAll(winView, resetBttn);
+		dementorViewList.forEach(dementor -> dementor.stopDementor());
 	}
 	
 	public void setLostView() {
 		Image lostImg = new Image("file:img/game_over.png");
 		ImageView lostView = new ImageView(lostImg);
-		lostView.setX(240);
+		lostView.setX(210);
 		lostView.setY(150);
 		
-		Button lostBttn = new Button("New Game");
-		lostBttn.setLayoutX(350);
-		lostBttn.setLayoutY(280);
+		resetBttn.setLayoutX(350);
+		resetBttn.setLayoutY(280);
 		
-		lostBttn.setOnMouseClicked(e -> {
+		resetBttn.setOnMouseClicked(e -> {
 			Main.startSelection();
-			Stage stage = (Stage) lostBttn.getScene().getWindow();
+			Stage stage = (Stage) resetBttn.getScene().getWindow();
 			stage.close();
 		});
-		pane.getChildren().addAll(lostView, lostBttn);
+		pane.getChildren().addAll(lostView, resetBttn);
 		dementorViewList.forEach(dementor -> dementor.stopDementor());
 	}
 	

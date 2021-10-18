@@ -7,24 +7,23 @@ import controller.GameController;
 import javafx.scene.Parent;
 
 public class GameModel extends Parent {
-	private static final int ROWS = 10;
+	private static final int ROWS = 11;
 	private static final int COLUMNS = 15;
 	private static final int TILE_SIZE = 50;
 	private int gamePoints = 0;
 	private TileModel[][] grid = new TileModel[COLUMNS][ROWS] ;
 	
 	private static int[][] MAZE = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-			{ 1, 0, 1, 0, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+			{ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 5, 1 },
 			{ 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1 },
 			{ 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-			{ 1, 3, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 5, 1 },
+			{ 1, 3, 1, 0, 0, 0, 0, 0, 1, 1, 1, 6, 1, 0, 1 },
 			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1 }, 
 			{ 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1 },
-			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 6, 1, 1, 1 }, 
-			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
-			{ 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1 },
-			{ 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1 },
-			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }};
+			{ 1, 0, 1, 0, 1, 1, 1, 0, 1, 4, 1, 0, 1, 1, 1 }, 
+			{ 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 },
+			{ 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 7, 1 },
+			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1 }};
 
 	private int numOfTiles = ROWS * COLUMNS;
 	private boolean gameWon = false;

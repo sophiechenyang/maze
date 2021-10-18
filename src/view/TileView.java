@@ -12,7 +12,7 @@ import model.TileModel;
 
 public class TileView extends ImageView {
 	private int tileSize = GameModel.getTileSize();
-	private Image tileImage = new Image("file:img/tile.png");
+	private Image tileImage = new Image("file:img/tile2.png");
 	private Image grassTile = new Image("file:img/tile.png");
 	private Image wandImage = new Image("file:img/wand.png");
 	private Image snakeImage = new Image("file:img/snake.png");
@@ -30,11 +30,6 @@ public class TileView extends ImageView {
 
 			this.setFitWidth(tileSize);
 			this.setFitHeight(tileSize);
-		} else if (tileType == 0) {
-			//this.setImage(tileImage);
-
-			//this.setFitWidth(tileSize);
-			//this.setFitHeight(tileSize);
 		} else if (tileType == 3) {
 			this.setImage(snakeImage);
 
