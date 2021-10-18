@@ -12,14 +12,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.GameModel;
+import view.GameView;
 
 public class VoldemortScene {
 	private GameModel gameModel;
+	private GameView gameView;
 	Pane root = new Pane();
 	private Button closeButton = new Button("Return to the Maze");
 	
-	public VoldemortScene(GameModel gameModel) {
+	public VoldemortScene(GameModel gameModel, GameView gameView) {
 		this.gameModel = gameModel;
+		this.gameView = gameView;
 	}
 	
 	public Parent makeVoldemortScene() {
@@ -56,6 +59,8 @@ public class VoldemortScene {
     	battleView.setOnMouseClicked(e -> {
     		battleView.setImage(null);
     		gameModel.setVoldemortDefeated(true);
+			gameModel.increaseGamePointsBy(5000);
+			gameView.updateScore(gameModel);
     		root.getChildren().addAll(defeatView, closeButton);
     	});
     	

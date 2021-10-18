@@ -62,6 +62,8 @@ public class WandScene {
 						harryView.setImage(null);
 						instructView.setImage(wandObtained);
 						gameModel.setWandRetrieved(true);
+						gameModel.increaseGamePointsBy(2000);
+						gameView.updateScore(gameModel);
 						closeButton.setOnMouseClicked(e -> closeWindow());
 						root.getChildren().addAll(closeButton);
 					}

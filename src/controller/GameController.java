@@ -30,19 +30,21 @@ public class GameController {
 	Timer timer;
 	private int tileSize = GameModel.getTileSize();
 	private ArrayList<DementorModel> dementorList = gameModel.getDementorList();
+	private int maxDementor;
+	private int timeLeft;
 	
 	public GameController(boolean difficulty, int playerType) {
 		gameView.setKeyPressHandler(new events());
 		gameModel.setPlayerType(playerType);
-		gameModel.isAdvanced();
-		
+		gameModel.setAdvanced(difficulty);
+		difficultySetting();
 		startGame();
 	}
 
 	public void startGame() {
 		timer = new Timer();
 		
-		timer.schedule(new CheckWin(), 0, 100);
+		timer.schedule(new CheckWin(), 0, 1000);
 		gameModel.setGameActive(true);
 		
 		playerModel = gameModel.createPlayer(gameModel.getPlayerType());
@@ -61,6 +63,16 @@ public class GameController {
 		timer.schedule(new RemindTask(), 0, 10000);
 
 	}
+	
+	public void difficultySetting() {
+		if (gameModel.isAdvanced()) {
+			maxDementor = 10;
+			timeLeft = 300;
+		} else {
+			maxDementor = 20;
+			timeLeft = 500;
+		}
+	}
 
 	class RemindTask extends TimerTask {
 
@@ -68,11 +80,11 @@ public class GameController {
 			Platform.runLater(() -> {
 				int dementorCount = dementorList.size();
 
-				if (dementorCount < 20) {
+				if (dementorCount < maxDementor) {
 					createDementor();
 				}  
 				
-				if (dementorCount > 0){
+				if (dementorCount >= maxDementor){
 					setGameOver();
 				}
 			});
@@ -83,6 +95,11 @@ public class GameController {
 
 		public void run() {
 			Platform.runLater(() -> {
+				timeLeft--;
+				gameView.updateTime(timeLeft);
+				if (timeLeft <= 0 ) {
+					setGameOver();
+				}
 				
 			});
 		}
@@ -100,9 +117,9 @@ public class GameController {
 	}
 
 	void createMana(int x, int y) {
-		ManaModel treasure = gameModel.createTreasure(x, y);
-		ManaView manaView = gameView.createTreasure(treasure);
-		ManaController manaController = new ManaController(treasure, manaView, gameModel, gameView, playerModel);
+		ManaModel mana = gameModel.createTreasure(x, y);
+		ManaView manaView = gameView.createMana(mana);
+		ManaController manaController = new ManaController(mana, manaView, gameModel, gameView, playerModel);
 	}
 
 	class resetGameEvent implements EventHandler<MouseEvent> {
@@ -141,22 +158,18 @@ public class GameController {
 				return;
 			}
 		
-			if (playerModel.getX() == 13 && playerModel.getY() == 10) {
-				gameModel.setGameWon(true);
-				System.out.println("Game won:" + gameModel.isGameWon());
-			} else if (maze[playerModel.getY()][playerModel.getX()] == 3 && !gameModel.isSnakeDefeated()) {
-				Main.launchSnakeScene(gameModel);
+			if (maze[playerModel.getY()][playerModel.getX()] == 3 && !gameModel.isSnakeDefeated()) {
+				Main.launchSnakeScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 4 && !gameModel.isWandRetrieved()) {
 				Main.launchWandScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 5 && !gameModel.isCodeRetrieved()) {
 				Main.launchSafeScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 6 && !gameModel.isClearedDementors()) {
-				Main.launchSwipeScene(gameModel);
+				Main.launchSwipeScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 7 && !gameModel.isVoldemortDefeated()) {
-				Main.launchVoldemortScene(gameModel);
-			}  
-			
-			if (maze[playerModel.getY()][playerModel.getX()] == 8) {
+				Main.launchVoldemortScene(gameModel, gameView);
+			} else if (maze[playerModel.getY()][playerModel.getX()] == 8) {
+				gameModel.setGameWon(true);
 				Main.launchEndScene(gameModel);
 			}
 			
@@ -187,6 +200,10 @@ public class GameController {
 			//decrease health when running into dementor
 			checkDementorCollision();
 			
+			if (playerModel.getHealth() <= 0) {
+				setGameOver();
+			}
+			
 		}
 	}
 
@@ -205,13 +222,12 @@ public class GameController {
 		return gameView;
 	}
 
-
 	public void setGameView(GameView gameView) {
 		this.gameView = gameView;
 	}
 
-	public void updateDementorScore() {
-		gameModel.increaseGamePointsBy(5);
+	public void updateScore(int score) {
+		gameModel.increaseGamePointsBy(score);
 		gameView.updateScore(gameModel);
 	}
 

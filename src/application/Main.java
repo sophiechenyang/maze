@@ -25,9 +25,9 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		CSS = getClass().getResource("style.css").toExternalForm();
-	    startGame();
+	    //startGame();
 	    
-        //launchGame(true,2);
+        launchGame(true,2);
         //launchSwipeScene(gameModel);
         //launchVoldemortScene(gameModel);
         //launchEndScene(gameModel);
@@ -39,31 +39,6 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 
-	}
-	
-	public void newGame() throws Exception {
-		start(primaryStage);
-	}
-	
-	public static void launchGame(boolean difficulty, int playerType) {
-		Pane root = new Pane();
-        GameController controller = new GameController(difficulty, playerType);
-        root.getChildren().add(controller.getGameView());
-        Scene gameScene = new Scene(root, 1050, 700);
-        Stage gameStage = new Stage();
-        gameStage.setScene(gameScene);
-        gameStage.setTitle("HP Maze");
-        gameStage.show();
-	}
-	
-	public static void launchSnakeScene(GameModel gameModel) {
-		SnakeScene snakeView = new SnakeScene(gameModel);
-		Scene snakeScene = new Scene(snakeView.makeSnakeScene(), 850, 480);
-		Stage snakeStage = new Stage();
-		snakeStage.setTitle("Fight Snake");
-		snakeStage.setScene(snakeScene);
-		snakeStage.show();
-		
 	}
 	
 	public static void startGame() {
@@ -87,6 +62,32 @@ public class Main extends Application{
         });
 	}
 	
+	public static void launchGame(boolean difficulty, int playerType) {
+		Pane root = new Pane();
+        GameController controller = new GameController(difficulty, playerType);
+        root.getChildren().add(controller.getGameView());
+        Scene gameScene = new Scene(root, 1050, 700);
+        Stage gameStage = new Stage();
+        gameStage.setScene(gameScene);
+        gameStage.setTitle("HP Maze");
+        gameStage.show();
+        
+        gameStage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
+	}
+	
+	public static void launchSnakeScene(GameModel gameModel, GameView gameView) {
+		SnakeScene snakeView = new SnakeScene(gameModel, gameView);
+		Scene snakeScene = new Scene(snakeView.makeSnakeScene(), 850, 480);
+		Stage snakeStage = new Stage();
+		snakeStage.setTitle("Fight Snake");
+		snakeStage.setScene(snakeScene);
+		snakeStage.show();
+		
+	}
+	
 	public static void launchWandScene(GameModel gameModel, GameView gameView) {
 		WandScene wand = new WandScene(gameModel, gameView);
 		Scene wandScene = new Scene(wand.makeWandScene(), 698, 480);
@@ -106,8 +107,8 @@ public class Main extends Application{
 		safeStage.show();	
 	}
 	
-	public static void launchSwipeScene(GameModel gameModel) {
-		SwipeScene swipe = new SwipeScene(gameModel);
+	public static void launchSwipeScene(GameModel gameModel, GameView gameView) {
+		SwipeScene swipe = new SwipeScene(gameModel, gameView);
 		Scene safeScene = new Scene(swipe.makeSwipeScene(), 800, 450);
 		Stage swipeStage = new Stage();
 		swipeStage.setTitle("Swipe away trees");
@@ -115,8 +116,8 @@ public class Main extends Application{
 		swipeStage.show();	
 	}
 	
-	public static void launchVoldemortScene(GameModel gameModel) {
-		VoldemortScene voldemort = new VoldemortScene(gameModel);
+	public static void launchVoldemortScene(GameModel gameModel, GameView gameView) {
+		VoldemortScene voldemort = new VoldemortScene(gameModel, gameView);
 		Scene voldemortScene = new Scene(voldemort.makeVoldemortScene(), 800, 450);
 		Stage voldemortStage = new Stage();
 		voldemortStage.setTitle("Defeat Voldemort");

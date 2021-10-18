@@ -1,5 +1,6 @@
 package scene;
 
+import controller.GameController;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -11,14 +12,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.GameModel;
+import view.GameView;
 
 public class SnakeScene {
 
 	private GameModel gameModel;
+	private GameView gameView;
 	Button closeButton = new Button("Continue to Game");
 
-	public SnakeScene(GameModel gameModel) {
+	public SnakeScene(GameModel gameModel, GameView gameView) {
 		this.gameModel = gameModel;
+		this.gameView = gameView;
 	}
 
 	public Parent makeSnakeScene() {
@@ -50,6 +54,8 @@ public class SnakeScene {
 				if (naginiView.getScaleX() < 0.18 && !gameModel.isSnakeDefeated()) {
 					
 					gameModel.setSnakeDefeated(true);
+					gameModel.increaseGamePointsBy(2000);
+					gameView.updateScore(gameModel);
 					instructView.setImage(snakedefeated);
 					root.getChildren().addAll(closeButton);
 				}

@@ -3,11 +3,9 @@ package view;
 import java.util.ArrayList;
 
 import controller.GameController;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -17,10 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.DementorModel;
@@ -45,6 +41,7 @@ public class GameView extends Parent{
 	private int mana;
 	private Text healthCount = new Text("0");
 	private int health;
+	private Text remainingTime = new Text("300");
 	private VBox inventory = new VBox();
 	private Image playerImg = new Image("file:img/harry.png");
 	private ImageView playerImgView = new ImageView(playerImg);
@@ -113,7 +110,7 @@ public class GameView extends Parent{
 		return dementorView;
 	}
 	
-	public ManaView createTreasure(ManaModel manaModel) {
+	public ManaView createMana(ManaModel manaModel) {
 		ManaView manaView = new ManaView(manaModel);
 		pane.getChildren().add(manaView);
 		return manaView;
@@ -123,10 +120,15 @@ public class GameView extends Parent{
 		gameScore.setText(Integer.toString(gameModel.getGamePoints())); ;
 	}
 	
+	public void updateTime (int timeLeft) {
+		remainingTime.setText(Integer.toString(timeLeft));
+	}
+	
 	public void updatePlayerStats(PlayerModel playerModel) {
 		manaCount.setText(Integer.toString(playerModel.getMana()));
 		healthCount.setText(Integer.toString(playerModel.getHealth()));
 	}
+	
 	// Game Title
 	public Pane createHeader() {
 		HBox header = new HBox();
@@ -146,9 +148,19 @@ public class GameView extends Parent{
 	}
 	
 	public Pane createLeftPanel() {
-		Pane leftcontainer = new Pane();
+		VBox leftcontainer = new VBox();
 		leftcontainer.setPrefWidth(sidePaneWidth);
-				
+		leftcontainer.setPadding(new Insets(15, 12, 15, 12));
+		leftcontainer.setSpacing(10);
+		
+		Text timerText = new Text("Time Remaining:");
+		timerText.setFill(Color.ANTIQUEWHITE);
+		remainingTime.setFill(Color.ANTIQUEWHITE);
+		
+		Text pointsText = new Text("Points: ");
+		pointsText.setFill(Color.FLORALWHITE);
+		gameScore.setFill(Color.FLORALWHITE);
+		
 		Image leftPaneImg = new Image("file:img/death_eaters.png");
 		ImageView leftPaneView = new ImageView(leftPaneImg);
 		
@@ -158,7 +170,7 @@ public class GameView extends Parent{
 		leftPaneView.setY(200);
 		leftPaneView.setX(20);
 		
-		leftcontainer.getChildren().addAll(leftPaneView);
+		leftcontainer.getChildren().addAll(timerText, remainingTime, pointsText, gameScore, leftPaneView);
 		return leftcontainer;
 	}
 	
@@ -254,7 +266,6 @@ public class GameView extends Parent{
 			Main.startGame();
 			Stage stage = (Stage) lostBttn.getScene().getWindow();
 			stage.close();
-			//Main.launchGame(true,2);
 		});
 		pane.getChildren().addAll(lostView, lostBttn);
 		dementorViewList.forEach(dementor -> dementor.stopDementor());

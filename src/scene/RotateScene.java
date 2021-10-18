@@ -58,6 +58,8 @@ public class RotateScene {
 				
 				if (sealView.getRotate()> 180 && !gameModel.isCodeRetrieved()) {
 					gameModel.setCodeRetrieved(true);
+					gameModel.increaseGamePointsBy(2000);
+					gameView.updateScore(gameModel);
 					root.getChildren().clear();
 					root.getChildren().addAll(unlockedView, closeButton);
 				}

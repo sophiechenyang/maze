@@ -71,7 +71,7 @@ public class DementorController {
 			dementorView.fadeDementor(this.dementorView);
 			dementorModel.setDead(true);
 			gameModel.removeFromBeetleList(dementorModel);
-			gameController.updateDementorScore();
+			gameController.updateScore(200);
 			playerModel.decreaseMana(15);
 			gameView.updatePlayerStats(playerModel);
 		}

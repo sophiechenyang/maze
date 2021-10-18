@@ -14,9 +14,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.GameModel;
+import view.GameView;
 
 public class SwipeScene {
 	private GameModel gameModel;
+	private GameView gameView;
 	private boolean isDLeftOutofBounds = false;
 	private boolean isDRightOutofBounds = false;
 	private boolean isDCenterOutofBounds = false;
@@ -27,8 +29,9 @@ public class SwipeScene {
 	private ImageView doneView = new ImageView(clear);
 	private Pane root = new Pane();
 
-	public SwipeScene(GameModel gameModel) {
+	public SwipeScene(GameModel gameModel, GameView gameView) {
 		this.gameModel = gameModel;
+		this.gameView = gameView;
 	}
 
 	public Parent makeSwipeScene() {
@@ -156,6 +159,8 @@ public class SwipeScene {
 		instructView.setImage(null);
 		root.getChildren().addAll(doneView, closeButton);
 		gameModel.setClearedDementors(true);
+		gameModel.increaseGamePointsBy(2000);
+		gameView.updateScore(gameModel);
 		System.out.println("challenge won!");
 	}
 	
