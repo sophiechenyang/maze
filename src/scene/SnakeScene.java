@@ -59,7 +59,7 @@ public class SnakeScene {
 				naginiView.setScaleY(naginiView.getScaleY() * event.getZoomFactor());
 
 				//System.out.println(naginiView.getScaleX());
-				if (naginiView.getScaleX() < 0.18 && !gameModel.isSnakeDefeated()) {
+				if (naginiView.getScaleX() < 0.5 && !gameModel.isSnakeDefeated()) {
 					
 					gameModel.setSnakeDefeated(true);
 					gameModel.increaseGamePointsBy(2000);
@@ -85,10 +85,6 @@ public class SnakeScene {
             scaleTransition.setToX(2f);
             scaleTransition.setToY(2f);
             scaleTransition.setCycleCount(1);
-		
-//        SequentialTransition sequentialTransition = new SequentialTransition(fadeIn, scaleTransition);
-//        sequentialTransition.setCycleCount(1);
-//        sequentialTransition.play();
         
         ParallelTransition parallelTransition = new ParallelTransition(
                 fadeIn,

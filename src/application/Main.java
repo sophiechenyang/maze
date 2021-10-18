@@ -25,9 +25,9 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		CSS = getClass().getResource("style.css").toExternalForm();
-	    //startGame();
+	    startSelection();
 	    
-        launchGame(true,2);
+        //launchGame(true,2);
         //launchSwipeScene(gameModel);
         //launchVoldemortScene(gameModel);
         //launchEndScene(gameModel);
@@ -41,7 +41,7 @@ public class Main extends Application{
 
 	}
 	
-	public static void startGame() {
+	public static void startSelection() {
 		Pane root = new Pane();
         setUpApp app = new setUpApp();
         app.setLayoutX(120);

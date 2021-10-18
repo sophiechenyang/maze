@@ -1,5 +1,8 @@
 package scene;
 
+import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -10,12 +13,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.GameModel;
 import view.GameView;
 
 public class WandScene {
 	private GameModel gameModel;
 	private GameView gameView;
+	Image wandImg = new Image("file:img/elder-wand.png");
+	ImageView wandView = new ImageView(wandImg);
 
 	public WandScene(GameModel gameModel, GameView gameView) {
 		this.gameModel = gameModel;
@@ -30,12 +36,12 @@ public class WandScene {
 
 		Button closeButton = new Button("Put Wand in Inventory");
 
-		Image wandImg = new Image("file:img/elder-wand.png");
-		ImageView wandView = new ImageView(wandImg);
+
 		wandView.setFitWidth(120);
 		wandView.setX(560);
 		wandView.setY(20);
 		wandView.setPreserveRatio(true);
+		animateWand();
 
 		Image harryImg = new Image("file:img/harry_broom.png");
 		ImageView harryView = new ImageView(harryImg);
@@ -82,5 +88,19 @@ public class WandScene {
 
 		root.getChildren().addAll(instructView, wandView, harryView);
 		return root;
+	}
+	
+	private void animateWand() {
+		TranslateTransition goUp = new TranslateTransition(Duration.millis(1000), wandView);
+		goUp.setToY(10);
+		
+		TranslateTransition goDown = new TranslateTransition(Duration.millis(1000), wandView);
+		goDown.setToY(0);
+		
+      SequentialTransition sequentialTransition = new SequentialTransition(goUp, goDown);
+      sequentialTransition.setCycleCount(Timeline.INDEFINITE);
+      sequentialTransition.play();
+		
+		
 	}
 }

@@ -260,7 +260,7 @@ public class GameView extends Parent{
 		lostBttn.setLayoutY(280);
 		
 		lostBttn.setOnMouseClicked(e -> {
-			Main.startGame();
+			Main.startSelection();
 			Stage stage = (Stage) lostBttn.getScene().getWindow();
 			stage.close();
 		});

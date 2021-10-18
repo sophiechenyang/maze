@@ -195,6 +195,12 @@ public class GameController {
 				TileView tileView = gameView.getTileOfType(5);
 				tileView.setImage(null);
 			}
+			
+			// hide Voldemort after it has been defeated
+			if (gameModel.isVoldemortDefeated()) {
+				TileView tileView = gameView.getTileOfType(7);
+				tileView.setImage(null);
+			}
 				
 				
 			//decrease health when running into dementor
