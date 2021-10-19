@@ -19,6 +19,7 @@ public class TileView extends ImageView {
 	private Image rotateImage = new Image("file:img/book.png");
 	private Image swipeImage = new Image("file:img/bush.png");
 	private Image voldemortImage = new Image("file:img/voldemort.png");
+	private Image hallowsImage = new Image("file:img/hallows.png");
 
 	private int tileType;
 
@@ -60,6 +61,11 @@ public class TileView extends ImageView {
 
 			this.setFitWidth(tileSize);
 			this.setFitHeight(tileSize);
+		}else if (tileType == 9) {
+			this.setImage(hallowsImage);
+
+			this.setFitWidth(tileSize-5);
+			this.setFitHeight(tileSize-5);
 		}
 		
 

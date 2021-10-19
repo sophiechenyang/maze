@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import application.Main;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -168,12 +169,17 @@ public class GameController {
 				Main.launchVoldemortScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 8 && gameModel.isVoldemortDefeated()) {
 				setGameWon();
-				//Main.launchEndScene(gameModel);
 			}
 			
-			if (maze[playerModel.getY()][playerModel.getX()] == 9 && !gameModel.isSnakeDefeated() || !gameModel.isWandRetrieved() || !gameModel.isCodeRetrieved()) {
-				System.out.println("not ready");
+			if (maze[playerModel.getY()][playerModel.getX()] == 9) {
+				if (!gameModel.isSnakeDefeated() || !gameModel.isWandRetrieved() || !gameModel.isCodeRetrieved()) {
+					Main.launchReadyScene(gameModel,gameView);
+				}
 			}
+			
+//			if (maze[playerModel.getY()][playerModel.getX()] == 9 && !gameModel.isSnakeDefeated() || !gameModel.isWandRetrieved() || !gameModel.isCodeRetrieved()) {
+//				Main.launchReadyScene(gameModel,gameView);
+//			}
 			
 			if (gameModel.isSnakeDefeated() && gameModel.isWandRetrieved() && gameModel.isCodeRetrieved() && !gameModel.isShowReady()) {
 				gameModel.setShowReady(true);
@@ -198,12 +204,18 @@ public class GameController {
 				tileView.setImage(null);
 			}
 			
+			// hallows turns yellow when player is ready to defeat voldemort
+			if (gameModel.isSnakeDefeated() && gameModel.isWandRetrieved() && gameModel.isCodeRetrieved()) {
+				TileView tileView = gameView.getTileOfType(9);
+				Image hallowsActivatedImage = new Image("file:img/hallows_activated.png");
+				tileView.setImage(hallowsActivatedImage);
+			}
+			
 			// hide Voldemort after it has been defeated
 			if (gameModel.isVoldemortDefeated()) {
 				TileView tileView = gameView.getTileOfType(7);
 				tileView.setImage(null);
-			}
-				
+			}	
 				
 			//decrease health when running into dementor
 			checkDementorCollision();

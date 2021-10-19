@@ -28,9 +28,9 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		//CSS = getClass().getResource("style.css").toExternalForm();
 	    //startSelection();
-		launchSetUp();
+		//launchSetUp();
 	    
-        //launchGame(true,2);
+        launchGame(true,2);
         //launchSwipeScene(gameModel);
         //launchVoldemortScene(gameModel);
         //launchEndScene(gameModel);
