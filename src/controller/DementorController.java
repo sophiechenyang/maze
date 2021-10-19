@@ -19,7 +19,8 @@ public class DementorController {
 	private GameView gameView;
 	private PlayerModel playerModel;
 
-	public DementorController(DementorModel dementorModel, DementorView dementorView, GameModel gameModel, GameView gameView, GameController gameController, PlayerModel playerModel) {
+	public DementorController(DementorModel dementorModel, DementorView dementorView, GameModel gameModel,
+			GameView gameView, GameController gameController, PlayerModel playerModel) {
 		this.dementorView = dementorView;
 		this.dementorModel = dementorModel;
 		this.gameModel = gameModel;
@@ -35,38 +36,38 @@ public class DementorController {
 
 		@Override
 		public void handle(MouseEvent e) {
-			if (e.getClickCount() > 2  && playerModel.getMana()>= 15) {
-				//System.out.println(e);
-				
+			if (e.getClickCount() > 2 && playerModel.getMana() >= 15) {
+				// System.out.println(e);
+
 				if (dementorModel.isDead())
 					return;
-				
+
 				killDementor();
-				
-			} else if (e.getButton() == MouseButton.SECONDARY){
+
+			} else if (e.getButton() == MouseButton.SECONDARY) {
 				dementorView.stopDementor();
 			}
 		}
 	}
-	
+
 	class hoverDementor implements EventHandler<MouseEvent> {
 
 		@Override
 		public void handle(MouseEvent e) {
-			
-			if(playerModel.getMana()< 15) {
+
+			if (playerModel.getMana() < 15) {
 				Tooltip t = new Tooltip("You are out of mana");
 				dementorView.setCursor(Cursor.DISAPPEAR);
 				Tooltip.install(dementorView, t);
 			} else {
 				dementorView.setCursor(Cursor.HAND);
 			}
-			
+
 		}
 	}
-	
+
 	private void killDementor() {
-		
+
 		if (gameModel.isGameActive()) {
 			dementorView.fadeDementor(this.dementorView);
 			dementorModel.setDead(true);
@@ -76,6 +77,5 @@ public class DementorController {
 			gameView.updatePlayerStats(playerModel);
 		}
 	}
-	
 
 }

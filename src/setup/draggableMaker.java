@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import model.MenuResult;
 
 public class draggableMaker {
 	private Rectangle character;
@@ -21,47 +22,70 @@ public class draggableMaker {
 	int curseur = 0;
 	int nomcharacters = 4; 
     int nomselection = 0; 
+    private int selectedRole = 0;  
+    MenuResult resultModel = new MenuResult();
     
-    Text difficultylevel;
-    Text namecharacter;
+	
+    
+    
+    
+public void setRole(int selectedRole) {
+	
+	this.selectedRole = selectedRole;
+}
+    
+   
+ public int getRole()   {
+	 
+	 return selectedRole;
+	 
+ }
 	
 	
 	
-	
-	
-	
-public void insertImage(Image i, VBox vb1){
+ 
+ 
+//Insert picture	
+public void insertImage(Image i, VBox vb1, int ID){
         
         iv = new ImageView();
         iv.setImage(i);
          
-        setupGestureSource(iv);
-
+        
+        setupGestureSource(iv, ID);
         vb1.getChildren().add(iv);
     }
 	
+
+
+
 	
-	
-	
-public void setupGestureSource(final ImageView source){
+public void setupGestureSource(final ImageView source, int ID){
         
+	
+	
         source.setOnDragDetected(new EventHandler <MouseEvent>() {
 
            @Override
            public void handle(MouseEvent event) {
 
-               /* allow any transfer mode */
-               Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
-                
-               /* put a image on dragboard */
+             
+               Dragboard db = source.startDragAndDrop(TransferMode.MOVE);           
                ClipboardContent content = new ClipboardContent();
-                
+               
                Image sourceImage = source.getImage();
+               
                content.putImage(sourceImage);
                db.setContent(content);
 
-                iv = source ;
+               iv = source;               
                
+               resultModel.setRole(ID);
+               setRole(ID);
+               
+              
+               
+               System.out.print("You have selected:"+ resultModel.getRole());
                event.consume();
            }
        });
@@ -81,15 +105,20 @@ public void setupGestureSource(final ImageView source){
 	
 	
 public void setupGestureTarget(final VBox selectedCharacter){
+	
+	
+	
+	
         
         selectedCharacter.setOnDragOver(new EventHandler <DragEvent>() {
             @Override
             public void handle(DragEvent event) {
  
                 Dragboard db = event.getDragboard();
-                 
+                
                 if(db.hasImage()){
                     event.acceptTransferModes(TransferMode.MOVE);
+                    
                 }
                  
                 event.consume();
@@ -105,6 +134,7 @@ public void setupGestureTarget(final VBox selectedCharacter){
                 if(db.hasImage()){
  
                     iv.setImage(db.getImage());
+                    
 
                     Point2D localPoint = selectedCharacter.sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY()));
 
@@ -116,8 +146,12 @@ public void setupGestureTarget(final VBox selectedCharacter){
 
                     iv.setX((int)(localPoint.getX() - iv.getBoundsInLocal().getWidth()  / 2)  );
                     iv.setY((int)(localPoint.getY() - iv.getBoundsInLocal().getHeight() / 2) );
+                    
+                    
+                    
 
                     selectedCharacter.getChildren().add(iv);
+                    
                     
                     
                 if(curseur > 600 && event.getSceneX() > 600){
@@ -134,12 +168,12 @@ public void setupGestureTarget(final VBox selectedCharacter){
                    
                  }   
                  event.setDropCompleted(true);
-             }else{
+                 
                  event.setDropCompleted(false);
              }
                 
                 
-                System.out.println("Drag droped");
+                
                 event.consume();
             }
             
