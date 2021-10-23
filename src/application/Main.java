@@ -4,9 +4,10 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.GameModel;
-import setup.setUpApp;
 import view.GameView;
 import scene.WandScene;
 import scene.ReadyScene;
@@ -14,23 +15,28 @@ import scene.RotateScene;
 import scene.SnakeScene;
 import scene.SwipeScene;
 import scene.VoldemortScene;
+
+import java.io.File;
+
 import controller.GameController;
-import setup.setUpApp;
 
 public class Main extends Application{
-	setUpApp App = new setUpApp();
 	GameModel gameModel;
 	GameView gameView;
 	static Stage primaryStage = new Stage();
-	static String CSS;
+	File f;
+	Media m;
+	MediaPlayer mp; 
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//CSS = getClass().getResource("style.css").toExternalForm();
 	    //startSelection();
-		//launchSetUp();
+	    f = new File("src/harry_potter.mp3");
+        m = new Media(f.toURI().toString());
+        mp = new MediaPlayer(m);
+    	//mp.play();
 	    
-        launchGame(true,2);
+    	launchGame(true,2);
         //launchSwipeScene(gameModel);
         //launchVoldemortScene(gameModel);
         //launchEndScene(gameModel);
@@ -43,54 +49,6 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 
-	}
-	
-	public void launchSetUp() {
-		
-	       Pane root = new Pane();
-	       root.getChildren().addAll(App);
-	       
-	       
-	       Scene scene = new Scene(root, 1440,900);
-	       Stage menuStage = new Stage();
-	       menuStage.setScene(scene);
-	       menuStage.show();	
-	       
-	        // stop application on window close
-	       menuStage.setOnCloseRequest(e -> {
-	            Platform.exit();
-	            System.exit(0);
-	        });
-		}
-	
-	public static void startSelection() {
-//		Pane root = new Pane();
-//        setUpApp app = new setUpApp();
-//        app.setLayoutX(120);
-//        app.setPadding(new Insets(100,100,100,100));
-//        root.getChildren().add(app);
-//        
-//        Scene scene = new Scene(root, 1080, 1080);
-//        scene.getStylesheets().add(CSS);
-//        
-//        primaryStage.setScene(scene);
-//        primaryStage.setTitle("HP Maze");
-//        primaryStage.show();
-	       Pane root = new Pane();
-	       //root.getChildren().addAll(App);
-	       
-	       
-	       Scene scene = new Scene(root, 1440,900);
-	       Stage menuStage = new Stage();
-	       menuStage.setScene(scene);
-	       menuStage.show();
-		
-        
-        // stop application on window close
-        primaryStage.setOnCloseRequest(e -> {
-            Platform.exit();
-            System.exit(0);
-        });
 	}
 	
 	public static void launchGame(boolean difficulty, int playerType) {

@@ -55,10 +55,7 @@ public class GameModel extends Parent {
 		} else if (playerType == 3) {
 			DracoModel player = new DracoModel(playerType);
 			return player;
-		} else if (playerType == 4) {
-			DobbyModel player = new DobbyModel(playerType);
-			return player;
-		}
+		} 
 		
 		return null;
 	}

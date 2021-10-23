@@ -255,12 +255,11 @@ public class GameView extends Parent{
 		resetBttn.setLayoutY(340);
 		
 		resetBttn.setOnMouseClicked(e -> {
-			Main.startSelection();
+			Main.launchGame(true,2);
 			Stage stage = (Stage) resetBttn.getScene().getWindow();
 			stage.close();
 		});
 		
-		//pane.getChildren().clear();
 		pane.getChildren().addAll(winView, resetBttn);
 		dementorViewList.forEach(dementor -> dementor.stopDementor());
 	}
@@ -275,7 +274,7 @@ public class GameView extends Parent{
 		resetBttn.setLayoutY(280);
 		
 		resetBttn.setOnMouseClicked(e -> {
-			Main.startSelection();
+			Main.launchGame(true,2);
 			Stage stage = (Stage) resetBttn.getScene().getWindow();
 			stage.close();
 		});

@@ -33,7 +33,7 @@ public class GameController {
 	private ArrayList<DementorModel> dementorList = gameModel.getDementorList();
 	private int maxDementor;
 	private int timeLeft;
-	
+
 	public GameController(boolean difficulty, int playerType) {
 		gameView.setKeyPressHandler(new events());
 		gameModel.setPlayerType(playerType);
@@ -44,10 +44,10 @@ public class GameController {
 
 	public void startGame() {
 		timer = new Timer();
-		
+
 		timer.schedule(new CheckWin(), 0, 1000);
 		gameModel.setGameActive(true);
-		
+
 		playerModel = gameModel.createPlayer(gameModel.getPlayerType());
 
 		for (int y = 0; y < GameModel.getRows(); y++) {
@@ -58,13 +58,14 @@ public class GameController {
 					createMana(x, y);
 			}
 		}
-		
-		playerView = gameView.createPlayer(playerModel); // This is called after jewels and tiles so player display on top 
+
+		playerView = gameView.createPlayer(playerModel); // This is called after jewels and tiles so player display on
+															// top
 
 		timer.schedule(new RemindTask(), 0, 10000);
 
 	}
-	
+
 	public void difficultySetting() {
 		if (gameModel.isAdvanced()) {
 			maxDementor = 10;
@@ -83,25 +84,31 @@ public class GameController {
 
 				if (dementorCount < maxDementor) {
 					createDementor();
-				}  
-				
-				if (dementorCount >= maxDementor){
+				}
+
+				if (dementorCount >= maxDementor) {
 					setGameOver();
 				}
 			});
 		}
 	}
-	
+
 	class CheckWin extends TimerTask {
 
 		public void run() {
 			Platform.runLater(() -> {
 				timeLeft--;
 				gameView.updateTime(timeLeft);
-				if (timeLeft <= 0 ) {
+				if (timeLeft <= 0) {
 					setGameOver();
 				}
-				
+
+				if (playerModel.getHealth() <= 0) {
+					setGameOver();
+				}
+
+				checkDementorCollision();
+
 			});
 		}
 	}
@@ -114,7 +121,8 @@ public class GameController {
 	public void createDementor() {
 		DementorModel dementorModel = gameModel.createDementor();
 		DementorView dementorView = gameView.createDementor(dementorModel, this);
-		DementorController dementorController = new DementorController(dementorModel, dementorView, gameModel, gameView, this, playerModel);
+		DementorController dementorController = new DementorController(dementorModel, dementorView, gameModel, gameView,
+				this, playerModel);
 	}
 
 	void createMana(int x, int y) {
@@ -156,7 +164,7 @@ public class GameController {
 				playerView.moveY(playerModel.getY() * tileSize);
 
 			}
-		
+
 			if (maze[playerModel.getY()][playerModel.getX()] == 3 && !gameModel.isSnakeDefeated()) {
 				Main.launchSnakeScene(gameModel, gameView);
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 4 && !gameModel.isWandRetrieved()) {
@@ -170,70 +178,73 @@ public class GameController {
 			} else if (maze[playerModel.getY()][playerModel.getX()] == 8 && gameModel.isVoldemortDefeated()) {
 				setGameWon();
 			}
-			
+
 			if (maze[playerModel.getY()][playerModel.getX()] == 9) {
 				if (!gameModel.isSnakeDefeated() || !gameModel.isWandRetrieved() || !gameModel.isCodeRetrieved()) {
-					Main.launchReadyScene(gameModel,gameView);
+					Main.launchReadyScene(gameModel, gameView);
 				}
 			}
-			
+
 //			if (maze[playerModel.getY()][playerModel.getX()] == 9 && !gameModel.isSnakeDefeated() || !gameModel.isWandRetrieved() || !gameModel.isCodeRetrieved()) {
 //				Main.launchReadyScene(gameModel,gameView);
 //			}
-			
-			if (gameModel.isSnakeDefeated() && gameModel.isWandRetrieved() && gameModel.isCodeRetrieved() && !gameModel.isShowReady()) {
+
+			if (gameModel.isSnakeDefeated() && gameModel.isWandRetrieved() && gameModel.isCodeRetrieved()
+					&& !gameModel.isShowReady()) {
 				gameModel.setShowReady(true);
 				gameView.readyForVoldemort();
 			}
-			
+
 			// hide snake after it has been defeated
 			if (gameModel.isSnakeDefeated()) {
 				TileView tileView = gameView.getTileOfType(3);
 				tileView.setImage(null);
 			}
-			
+
 			// hide wand after it has been retrieved
 			if (gameModel.isWandRetrieved()) {
 				TileView tileView = gameView.getTileOfType(4);
 				tileView.setImage(null);
 			}
-			
+
 			// hide book after code has been retrieved
 			if (gameModel.isCodeRetrieved()) {
 				TileView tileView = gameView.getTileOfType(5);
 				tileView.setImage(null);
 			}
-			
+
 			// hallows turns yellow when player is ready to defeat voldemort
 			if (gameModel.isSnakeDefeated() && gameModel.isWandRetrieved() && gameModel.isCodeRetrieved()) {
 				TileView tileView = gameView.getTileOfType(9);
 				Image hallowsActivatedImage = new Image("file:img/hallows_activated.png");
 				tileView.setImage(hallowsActivatedImage);
 			}
-			
+
 			// hide Voldemort after it has been defeated
 			if (gameModel.isVoldemortDefeated()) {
 				TileView tileView = gameView.getTileOfType(7);
 				tileView.setImage(null);
-			}	
-				
-			//decrease health when running into dementor
-			checkDementorCollision();
-			
-			if (playerModel.getHealth() <= 0) {
-				setGameOver();
 			}
-			
+
+			// decrease health when running into dementor
+			checkDementorCollision();
+
 		}
 	}
 
-	
 	public void checkDementorCollision() {
-		for (int i =0; i< dementorList.size(); i++) {
+		for (int i = 0; i < dementorList.size(); i++) {
 			DementorModel dementor = dementorList.get(i);
 			if (dementor.getX() == playerModel.getX() && dementor.getY() == playerModel.getY()) {
-				playerModel.reduceHealth(5);
-				gameView.updatePlayerStats(playerModel);
+				if (playerModel.getHealth() > 0 && !playerModel.isDamagedTaken()) {
+					playerModel.reduceHealth(5);
+					playerModel.setDamagedTaken(true);
+					gameView.updatePlayerStats(playerModel);
+				} else if (playerModel.getHealth() == 0) {
+					setGameOver();
+				}
+			} else {
+				playerModel.setDamagedTaken(false);
 			}
 		}
 	}
@@ -273,6 +284,5 @@ public class GameController {
 		timer.cancel();
 		gameView.reset();
 		gameModel.reset();
-		startGame();
 	}
 }

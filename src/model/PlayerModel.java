@@ -11,6 +11,7 @@ public class PlayerModel{
 	protected String[] charList = {"Harry Potter", "Ron Weasley", "Hermione Granger", "Draco Malfoy", "Dobby"};
 	protected String name;
 	protected int health;
+	private boolean damagedTaken = false;
 	
 	public PlayerModel(int playerIndex) {
 		this.setPlayerIndex(playerIndex);
@@ -74,6 +75,14 @@ public class PlayerModel{
 	
 	public void reduceHealth(int num) {
 		health = health - num;
+	}
+
+	public boolean isDamagedTaken() {
+		return damagedTaken;
+	}
+
+	public void setDamagedTaken(boolean damagedTaken) {
+		this.damagedTaken = damagedTaken;
 	}
 	
 }

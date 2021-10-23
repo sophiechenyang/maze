@@ -60,7 +60,6 @@ public class WandScene {
 			public void handle(ScrollEvent event) {
 				harryView.setTranslateX(harryView.getTranslateX() + event.getDeltaX());
 				harryView.setTranslateY(harryView.getTranslateY() + event.getDeltaY());
-				// event.consume();
 
 				if (harryView.getTranslateX() > 500 && harryView.getTranslateY() < -100) {
 					if (!gameModel.isWandRetrieved()) {
@@ -75,8 +74,8 @@ public class WandScene {
 					}
 				}
 
-				System.out.println(harryView.getTranslateX());
-				System.out.println(harryView.getTranslateY());
+//				System.out.println(harryView.getTranslateX());
+//				System.out.println(harryView.getTranslateY());
 			}
 
 			private void closeWindow() {

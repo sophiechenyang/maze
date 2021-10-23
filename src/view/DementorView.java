@@ -72,7 +72,6 @@ public class DementorView extends ImageView {
 		rotateTransition.setByAngle(90f);
 		rotateTransition.setOnFinished(e -> {
 			dementor.setX(dementorX + 1);
-			gameController.checkDementorCollision();
 		});
 
 		goRight.setToX(currentdementorX + increment);
@@ -81,7 +80,6 @@ public class DementorView extends ImageView {
 		rotateTransition2.setOnFinished(e -> {
 
 			dementor.setY(dementorY);
-			gameController.checkDementorCollision();
 		});
 
 		goDown.setToY(currentdementorY);
@@ -90,7 +88,6 @@ public class DementorView extends ImageView {
 		rotateTransition3.setOnFinished(e -> {
 
 			dementor.setX(dementorX);
-			gameController.checkDementorCollision();
 		});
 
 		goLeft.setToX(currentdementorX);
@@ -99,7 +96,6 @@ public class DementorView extends ImageView {
 		rotateTransition4.setOnFinished(e -> {
 
 			dementor.setY(dementorY - 1);
-			gameController.checkDementorCollision();
 		});
 
 		sequentialOngoing.setCycleCount(Timeline.INDEFINITE);
