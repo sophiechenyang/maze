@@ -1,8 +1,5 @@
-# maze
+# The Enchanted Maze
 
-The preliminary version of the maze includes a maze and basic key controllers implemented onto the player.
+The Enchanged Maze is a game that attempts to use novel interactions as part of game play.
 
-
-
-https://user-images.githubusercontent.com/80676658/135718504-fdee9493-e1ea-4540-9566-08ffff2c7e18.mov
-
+https://youtu.be/6akExow9n9U
